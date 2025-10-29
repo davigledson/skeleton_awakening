@@ -1,0 +1,118 @@
+[gd_scene load_steps=17 format=3 uid="uid://bgbivrdb5fqnj"]
+
+[ext_resource type="Texture2D" uid="uid://c0cv5amtc3co5" path="res://imgs_personagens/walk and idle.png" id="1_qsoig"]
+[ext_resource type="Script" uid="uid://qeb6lccbhnjj" path="res://cenas/personagem_principal.gd" id="1_utspe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm5ns"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5hsl"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65ng4"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57i12"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nn0f2"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(96, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvw6d"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(120, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyd5l"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(144, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o24p"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(168, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50ydm"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm30o"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awtln"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kgqd"]
+atlas = ExtResource("1_qsoig")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7rwpq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hm5ns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5hsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65ng4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57i12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nn0f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvw6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyd5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0o24p")
+}],
+"loop": true,
+"name": &"andando",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50ydm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mm30o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awtln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kgqd")
+}],
+"loop": true,
+"name": &"parado",
+"speed": 3.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_utspe"]
+size = Vector3(1, 0.9608154, 1)
+
+[node name="personagem_principal" type="CharacterBody3D"]
+transform = Transform3D(0.7894301, -0.6138049, -0.006616453, 0.2202134, 0.27312773, 0.93643355, -0.57298034, -0.74070567, 0.3507831, 0.016052246, 0, 0.0030201077)
+script = ExtResource("1_utspe")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.9358891, 0.22038937, -0.27484593, -0.3229881, 0.22523962, -0.9192085, -0.14067739, 0.949049, 0.2819817, -0.0010944158, 0.019981371, 0.029647714)
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_7rwpq")
+animation = &"andando"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.0014008582, -0.13765499, 0.025477853, 0.13710485, 0.006497901, 0.027568888, -0.028289648, 0.024675203, 0.13487332, 0.0013822233, 0.022402173, 0.016886478)
+shape = SubResource("BoxShape3D_utspe")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3gpihyaj1sp2"]
+
+[ext_resource type="PackedScene" uid="uid://bgbivrdb5fqnj" path="res://cenas/personagem_principal.tscn" id="1_ymfkh"]
+[ext_resource type="PackedScene" uid="uid://ce3ptwd14wflc" path="res://cenas/cenario.tscn" id="2_307yd"]
+
+[node name="cena_principal" type="Node3D"]
+
+[node name="personagem_principal" parent="." instance=ExtResource("1_ymfkh")]
+transform = Transform3D(0.7894301, -0.6138049, -0.006616453, 0.2202134, 0.27312773, 0.93643355, -0.57298034, -0.74070567, 0.3507831, 0.016052246, 0.07659334, 0.0030201077)
+
+[node name="cenario" parent="." instance=ExtResource("2_307yd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0037430227, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9854085, -0.03230357, 0.16711208, -0.0067407144, 0.9736474, 0.22795868, -0.17007214, -0.22575888, 0.95922285, 0.08207151, 0.28107473, 0.5394347)
