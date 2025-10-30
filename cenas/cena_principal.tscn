@@ -1,15 +1,1102 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3gpihyaj1sp2"]
+[gd_scene load_steps=26 format=3 uid="uid://c3gpihyaj1sp2"]
 
 [ext_resource type="PackedScene" uid="uid://bgbivrdb5fqnj" path="res://cenas/personagem_principal.tscn" id="1_ymfkh"]
-[ext_resource type="PackedScene" uid="uid://ce3ptwd14wflc" path="res://cenas/cenario.tscn" id="2_307yd"]
+[ext_resource type="PackedScene" uid="uid://018pp3isds4w" path="res://cenas/cenario_3.tscn" id="2_ymfkh"]
+[ext_resource type="Material" uid="uid://s3rgs812u4bh" path="res://textures/grass_material.tres" id="3_o3inm"]
+[ext_resource type="Texture2D" uid="uid://d3cupxftatc2v" path="res://textures/grass_tiles.png" id="4_h7caj"]
+[ext_resource type="Material" uid="uid://3mry6k0h0i1r" path="res://textures/stone_material.tres" id="5_71ivt"]
+[ext_resource type="Material" uid="uid://bki7wpo2b3vgu" path="res://textures/dark_stone_material.tres" id="6_x7vf8"]
+[ext_resource type="Texture2D" uid="uid://yurhixrkl37q" path="res://imgs_cenario/arvore_a.png" id="7_71ivt"]
+[ext_resource type="Texture2D" uid="uid://c3lq8fmate1nh" path="res://imgs_cenario/anime_skybox.jpg" id="7_h7caj"]
+[ext_resource type="Texture2D" uid="uid://b5dvywcdovtnt" path="res://imgs_cenario/prop_sprites.png" id="8_x7vf8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7aygr"]
+material = ExtResource("3_o3inm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_45lkh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u180s"]
+material = ExtResource("3_o3inm")
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qw7s0"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w0hmo"]
+material = ExtResource("5_71ivt")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oq2fh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qwv5u"]
+material = ExtResource("5_71ivt")
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4f413"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ogqb0"]
+material = ExtResource("6_x7vf8")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6h8ig"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4qba2"]
+material = ExtResource("6_x7vf8")
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u5a1u"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_t7abg"]
+resource_local_to_scene = true
+item/0/name = "grass block"
+item/0/mesh = SubResource("BoxMesh_7aygr")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/mesh_cast_shadow = 1
+item/0/shapes = [SubResource("BoxShape3D_45lkh"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+item/0/preview = ExtResource("4_h7caj")
+item/1/name = "grass half bottom"
+item/1/mesh = SubResource("BoxMesh_u180s")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+item/1/mesh_cast_shadow = 1
+item/1/shapes = [SubResource("BoxShape3D_qw7s0"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)]
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
+item/2/name = "stone block"
+item/2/mesh = SubResource("BoxMesh_w0hmo")
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/mesh_cast_shadow = 1
+item/2/shapes = [SubResource("BoxShape3D_oq2fh"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
+item/3/name = "stone half bottom"
+item/3/mesh = SubResource("BoxMesh_qwv5u")
+item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+item/3/mesh_cast_shadow = 1
+item/3/shapes = [SubResource("BoxShape3D_4f413"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)]
+item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/navigation_layers = 1
+item/4/name = "dark stone block"
+item/4/mesh = SubResource("BoxMesh_ogqb0")
+item/4/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/mesh_cast_shadow = 1
+item/4/shapes = [SubResource("BoxShape3D_6h8ig"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/navigation_layers = 1
+item/5/name = "dark stone half bottom"
+item/5/mesh = SubResource("BoxMesh_4qba2")
+item/5/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+item/5/mesh_cast_shadow = 1
+item/5/shapes = [SubResource("BoxShape3D_u5a1u"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)]
+item/5/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/navigation_layers = 1
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_71ivt"]
+panorama = ExtResource("7_h7caj")
+
+[sub_resource type="Sky" id="Sky_x7vf8"]
+sky_material = SubResource("PanoramaSkyMaterial_71ivt")
+
+[sub_resource type="Environment" id="Environment_t7abg"]
+background_mode = 2
+sky = SubResource("Sky_x7vf8")
 
 [node name="cena_principal" type="Node3D"]
 
 [node name="personagem_principal" parent="." instance=ExtResource("1_ymfkh")]
-transform = Transform3D(0.7894301, -0.6138049, -0.006616453, 0.2202134, 0.27312773, 0.93643355, -0.57298034, -0.74070567, 0.3507831, 0.016052246, 0.07659334, 0.0030201077)
+transform = Transform3D(0.9425085, -0.3162586, -0.10797705, 0.17505047, 0.19198608, 0.9656602, -0.28466824, -0.9290441, 0.23630956, 0.045279667, 0.4409516, 0.18503888)
 
-[node name="cenario" parent="." instance=ExtResource("2_307yd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0037430227, 0)
+[node name="Camera3D" type="Camera3D" parent="personagem_principal"]
+transform = Transform3D(0.9425076, 0.29538995, -0.15627885, -0.3162584, 0.6373134, -0.7027169, -0.10797709, 0.7117409, 0.6940928, -0.19195864, -0.79250985, 0.412724)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.9854085, -0.03230357, 0.16711208, -0.0067407144, 0.9736474, 0.22795868, -0.17007214, -0.22575888, 0.95922285, 0.08207151, 0.28107473, 0.5394347)
+[node name="cenario_3" parent="." instance=ExtResource("2_ymfkh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.154928, 0)
+
+[node name="GridMap" parent="cenario_3" index="0"]
+mesh_library = SubResource("MeshLibrary_t7abg")
+
+[node name="Sprite3D" parent="cenario_3/GridMap/arvores" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, 1.4290771, 0.531885, -1.1134423)
+texture_filter = 0
+
+[node name="Sprite3D2" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, -1.1134423)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D3" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, -2.1685872)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D4" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, -3.223731)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D5" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, -4.4054923)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D6" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="5"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, 0.068318844)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D7" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="6"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, 1.5455203)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D8" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="7"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, 2.5584593)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D9" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="8"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250514, 0.531885, 3.613603)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D10" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="9"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.321986, 0.531885, 3.5713973)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D11" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="10"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.321986, 0.531885, 2.5162535)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D12" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="11"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.321986, 0.531885, 1.6299319)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D41" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="12"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.59155, 0.531885, 1.6299319)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D62" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="13"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.4941998, 0.531885, 1.5455203)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D13" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="14"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.321986, 0.531885, 0.06831837)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D14" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="15"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.321986, 0.531885, 0.87022877)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D15" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="16"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -10.250513, 0.531885, 0.87022877)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D16" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="17"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.27978, 0.531885, -0.9868252)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D17" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="18"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.27978, 0.531885, -2.1263819)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D18" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="19"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.27978, 0.531885, -3.1263819)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D19" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="20"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -9.27978, 0.531885, -4.4347615)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D20" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="21"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.6337557, 0.531885, -4.4347615)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D21" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="22"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.705229, 0.531885, -4.4347615)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D22" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="23"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.6078787, 0.531885, -4.4347615)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D23" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="24"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.6078787, 0.531885, -4.4347615)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D24" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="25"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.5527334, 0.531885, -4.4347615)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D25" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="26"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.5527334, 0.531885, -3.1685886)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D26" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="27"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.523467, 0.531885, -3.1685886)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D27" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="28"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.494199, 0.531885, -3.1685886)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D28" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="29"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.591549, 0.531885, -3.1685886)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D29" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="30"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.646694, 0.531885, -3.1685886)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D30" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="31"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.646694, 0.531885, -2.1134448)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D31" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="32"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.646694, 0.531885, -1.1134448)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D32" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="33"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.646694, 0.531885, -0.31153607)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D33" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="34"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.646694, 0.531885, 0.912431)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D34" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="35"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.646694, 0.531885, 2.263015)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D35" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="36"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.646694, 0.531885, 3.6558049)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D36" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="37"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.380522, 0.531885, 3.6558049)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D38" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="38"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.0721426, 0.531885, 3.6558049)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D39" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="39"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.9325867, 0.531885, 3.6558049)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D40" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="40"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, 2.389632)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D42" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="41"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, -0.45448375)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D63" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="42"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, -1.07973)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D64" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="43"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.450906, 0.531885, -1.07973)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D65" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="44"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.593763, 0.531885, -1.07973)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D66" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="45"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.4752092, 0.531885, -1.07973)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D67" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="46"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.4752092, 0.531885, 0.27754998)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D68" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="47"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.500953, 0.531885, 0.27754998)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D69" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="48"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.510996, 0.531885, 0.27754998)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D70" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="49"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.4474325, 0.531885, 0.27754998)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D71" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="50"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.644756, 0.531885, 0.27754998)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D72" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="51"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 0.27754998)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D73" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="52"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 1.7394917)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D74" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="53"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 3.4748433)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D75" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="54"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -0.99644446)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D76" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="55"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -2.292957)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D77" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="56"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -3.3284967)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D78" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="57"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -4.5117483)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D79" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="58"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 2.698823)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D45" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="59"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, 0.85389495)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D46" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="60"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.5364065, 0.531885, 0.85389495)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D47" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="61"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.523469, 0.531885, 0.85389495)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D48" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="62"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.6793537, 0.531885, 0.85389495)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D49" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="63"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.6793537, 0.531885, 2.4999201)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D50" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="64"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.6793537, 0.531885, 1.6558039)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D51" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="65"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.481264, 0.531885, 1.6558039)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D52" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="66"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.62082, 0.531885, 1.6558039)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D53" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="67"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.6500864, 0.531885, 2.415507)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D54" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="68"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.40979, 0.531885, 2.415507)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D55" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="69"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.40979, 0.531885, -0.5388968)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D56" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="70"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.40979, 0.531885, -1.9316885)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D57" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="71"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.6078806, 0.531885, -1.9316885)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D58" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="72"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.5527353, 0.531885, -1.9316885)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D59" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="73"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.5527353, 0.531885, -0.4544866)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D60" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="74"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.523467, 0.531885, -0.62330985)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D61" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="75"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.523467, 0.531885, -0.62330985)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D43" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="76"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, -2.1005087)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D44" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="77"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, 5.834177)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D37" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="78"]
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="arbustos" type="Node" parent="cenario_3/GridMap" index="2"]
+
+[node name="Sprite3D" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3987412, 0)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D2" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4178293, 0.3987412, 0)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D3" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6341114, 0.3987412, -1.1370661)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D4" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6545854, 0.3987412, -0.53552556)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D5" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6158025, 0.3987412, -1.5367477)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D6" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3617952, 0.3987412, -1.5367477)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D7" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3617952, 0.3987412, -2.699926)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D8" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8660572, 0.3987412, -2.699926)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D9" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8660572, 0.3987412, -4.156267)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D10" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3161063, 0.3987412, -4.156267)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D11" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12679315, 0.3987412, -4.156267)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D12" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12679315, 0.3987412, -3.270125)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D13" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2804487, 0.3987412, -3.270125)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D14" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.333359, 0.3987412, -0.57162714)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D15" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0818021, 0.3987412, -0.57162714)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D17" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4851592, 0.3987412, -1.6453605)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D18" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4851592, 0.3987412, -2.649961)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="Sprite3D19" type="Sprite3D" parent="cenario_3/GridMap/arbustos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4851592, 0.3987412, -3.4810543)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 3
+
+[node name="cercado" type="Node" parent="cenario_3/GridMap" index="3"]
+
+[node name="Sprite3D20" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.4851592, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D21" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.9610317, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D22" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.4165206, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D39" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 3.9535751)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D40" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 3.469089)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D41" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 2.5183263)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D42" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 2.9881027)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D43" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 1.5720322)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D44" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 2.0418086)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D45" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 0.6638038)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D46" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 1.1335802)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D47" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -0.25795007)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D48" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, 0.21182632)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D49" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -1.1952331)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D50" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -0.7254567)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D51" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -2.15808)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D52" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -1.6883037)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D53" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -3.080035)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D54" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -2.6102586)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D55" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -3.9721377)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D56" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -3.5023613)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D57" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -4.932374)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D58" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(0.025210083, 0, -1.499788, 0, 1.5, 0, 1.499788, 0, 0.025210083, -11.054287, 0.47609127, -4.462598)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D36" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -9.8983555, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D37" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -10.374228, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D38" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -10.829717, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D23" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.8849716, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D24" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.35851, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D25" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.825693, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D26" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -5.2808447, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D27" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -5.7438645, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D28" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.1898046, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D29" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6.664025, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D30" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -7.1168284, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D31" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -7.5772595, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D32" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8.050995, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D33" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8.532875, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D34" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8.996196, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="Sprite3D35" type="Sprite3D" parent="cenario_3/GridMap/cercado"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -9.476577, 0.47609127, 4.1977696)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_x7vf8")
+hframes = 2
+vframes = 4
+frame = 2
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.46159384, 0.8870914, 0, -0.8870914, 0.46159384, -0.19228911, 6.1487913, 11.447344)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t7abg")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, 0, 0.531885, -1.1134423)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[editable path="cenario_3"]
