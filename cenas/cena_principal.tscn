@@ -354,235 +354,385 @@ alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D40" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="40"]
+[node name="Sprite3D80" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="40"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, 3.6558049)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D81" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="41"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, 2.5501578)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D82" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="42"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, 1.6438284)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D83" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="43"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, 0.358418)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D84" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="44"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, -2.0356092)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D85" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="45"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, -1.0452671)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D86" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="46"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, -4.9748554)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D87" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="47"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -2.5745132, 0.531885, -3.1655612)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D88" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="48"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, -3.1655612)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D89" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="49"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, -4.412554)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D90" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="50"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, -2.1132483)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D91" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="51"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, -1.0863156)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D92" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="52"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, 0.40422428)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D93" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="53"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, 1.66935)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D94" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="54"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, 0.9192039)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D95" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="55"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, 2.5776234)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D96" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="56"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -1.4367952, 0.531885, 3.607769)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D97" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="57"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -0.19801998, 0.531885, 3.607769)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D98" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="58"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -0.19801998, 0.531885, 2.4192019)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D99" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="59"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -0.19801998, 0.531885, 1.3595233)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D100" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="60"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -0.19801998, 0.531885, 0.38974547)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D101" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="61"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -0.19801998, 0.531885, -2.15249)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D102" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="62"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -0.19801998, 0.531885, -3.516863)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D103" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="63"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -0.19801998, 0.531885, -5.0544853)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D104" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="64"]
+transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, 0.5805061, 0.531885, -5.0544853)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_71ivt")
+
+[node name="Sprite3D40" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="65"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, 2.389632)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D42" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="41"]
+[node name="Sprite3D42" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="66"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, -0.45448375)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D63" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="42"]
+[node name="Sprite3D63" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="67"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, -1.07973)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D64" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="43"]
+[node name="Sprite3D64" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="68"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.450906, 0.531885, -1.07973)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D65" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="44"]
+[node name="Sprite3D65" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="69"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.593763, 0.531885, -1.07973)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D66" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="45"]
+[node name="Sprite3D66" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="70"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.4752092, 0.531885, -1.07973)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D67" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="46"]
+[node name="Sprite3D67" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="71"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.4752092, 0.531885, 0.27754998)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D68" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="47"]
+[node name="Sprite3D68" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="72"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.500953, 0.531885, 0.27754998)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D69" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="48"]
+[node name="Sprite3D69" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="73"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.510996, 0.531885, 0.27754998)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D70" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="49"]
+[node name="Sprite3D70" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="74"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.4474325, 0.531885, 0.27754998)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D71" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="50"]
+[node name="Sprite3D71" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="75"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -7.644756, 0.531885, 0.27754998)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D72" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="51"]
+[node name="Sprite3D72" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="76"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 0.27754998)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D73" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="52"]
+[node name="Sprite3D73" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="77"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 1.7394917)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D74" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="53"]
+[node name="Sprite3D74" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="78"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 3.4748433)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D75" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="54"]
+[node name="Sprite3D75" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="79"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -0.99644446)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D76" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="55"]
+[node name="Sprite3D76" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="80"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -2.292957)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D77" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="56"]
+[node name="Sprite3D77" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="81"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -3.3284967)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D78" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="57"]
+[node name="Sprite3D78" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="82"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, -4.5117483)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D79" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="58"]
+[node name="Sprite3D79" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="83"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -8.567547, 0.531885, 2.698823)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D45" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="59"]
+[node name="Sprite3D45" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="84"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, 0.85389495)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D46" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="60"]
+[node name="Sprite3D46" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="85"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.5364065, 0.531885, 0.85389495)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D47" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="61"]
+[node name="Sprite3D47" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="86"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.523469, 0.531885, 0.85389495)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D48" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="62"]
+[node name="Sprite3D48" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="87"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.6793537, 0.531885, 0.85389495)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D49" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="63"]
+[node name="Sprite3D49" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="88"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.6793537, 0.531885, 2.4999201)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D50" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="64"]
+[node name="Sprite3D50" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="89"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.6793537, 0.531885, 1.6558039)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D51" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="65"]
+[node name="Sprite3D51" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="90"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.481264, 0.531885, 1.6558039)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D52" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="66"]
+[node name="Sprite3D52" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="91"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.62082, 0.531885, 1.6558039)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D53" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="67"]
+[node name="Sprite3D53" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="92"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.6500864, 0.531885, 2.415507)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D54" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="68"]
+[node name="Sprite3D54" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="93"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.40979, 0.531885, 2.415507)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D55" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="69"]
+[node name="Sprite3D55" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="94"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.40979, 0.531885, -0.5388968)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D56" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="70"]
+[node name="Sprite3D56" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="95"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -5.40979, 0.531885, -1.9316885)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D57" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="71"]
+[node name="Sprite3D57" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="96"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.6078806, 0.531885, -1.9316885)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D58" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="72"]
+[node name="Sprite3D58" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="97"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.5527353, 0.531885, -1.9316885)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D59" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="73"]
+[node name="Sprite3D59" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="98"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -3.5527353, 0.531885, -0.4544866)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D60" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="74"]
+[node name="Sprite3D60" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="99"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.523467, 0.531885, -0.62330985)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D61" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="75"]
+[node name="Sprite3D61" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="100"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -4.523467, 0.531885, -0.62330985)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D43" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="76"]
+[node name="Sprite3D43" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="101"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, -2.1005087)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D44" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="77"]
+[node name="Sprite3D44" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="102"]
 transform = Transform3D(1, 0, 0, 0, 0.9678103, -0.25168088, 0, 0.25168088, 0.9678103, -6.507139, 0.531885, 5.834177)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
 
-[node name="Sprite3D37" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="78"]
+[node name="Sprite3D37" type="Sprite3D" parent="cenario_3/GridMap/arvores" index="103"]
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_71ivt")
