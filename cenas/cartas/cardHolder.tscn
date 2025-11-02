@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://vdfatprkvsuo"]
+
+[ext_resource type="Script" uid="uid://dlt2fx8y5np1o" path="res://cenas/cartas/cardHolder.gd" id="1_shmd5"]
+
+[node name="CardHolder" type="Container"]
+custom_minimum_size = Vector2(105, 136)
+offset_right = 105.0
+offset_bottom = 136.0
+script = ExtResource("1_shmd5")

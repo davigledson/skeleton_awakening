@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://brbjtut0lehvd"]
+
+[ext_resource type="PackedScene" uid="uid://8cbh7i68sqro" path="res://textures/castelo/wall.glb" id="1_fpgyp"]
+[ext_resource type="Material" uid="uid://3mry6k0h0i1r" path="res://textures/stone_material.tres" id="2_koc5e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_40m03"]
+
+[node name="parede_castelo" instance=ExtResource("1_fpgyp")]
+
+[node name="wall" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_koc5e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall/StaticBody3D" index="0"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 1, 0, 2.0410614, 0)
+shape = SubResource("BoxShape3D_40m03")

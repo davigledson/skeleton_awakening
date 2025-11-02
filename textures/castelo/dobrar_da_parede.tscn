@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn70q2demm7i7"]
+
+[ext_resource type="PackedScene" uid="uid://crlte8fgstsc0" path="res://textures/castelo/wall_corner.glb" id="1_k7xgr"]
+[ext_resource type="Material" uid="uid://3mry6k0h0i1r" path="res://textures/stone_material.tres" id="2_bn6uy"]
+
+[node name="dobrar_da_parede" instance=ExtResource("1_k7xgr")]
+
+[node name="wall_corner" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_bn6uy")
