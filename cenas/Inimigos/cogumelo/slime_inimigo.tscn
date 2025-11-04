@@ -1,0 +1,147 @@
+[gd_scene load_steps=22 format=3 uid="uid://dsgvv52lpnb4q"]
+
+[ext_resource type="Script" uid="uid://conx5ipe4sgu1" path="res://cenas/Inimigos/slime/slime_inimigo.gd" id="1_mqdjj"]
+[ext_resource type="Texture2D" uid="uid://bl56jp73eoejc" path="res://cenas/Inimigos/slime/slime_run.png" id="1_wrq6g"]
+[ext_resource type="Texture2D" uid="uid://rb4qxg037k64" path="res://cenas/Inimigos/slime/slime_die.png" id="2_mqdjj"]
+[ext_resource type="Texture2D" uid="uid://bw6w85y5260ww" path="res://cenas/Inimigos/slime/slime_idle.png" id="3_r6jkf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8n78"]
+atlas = ExtResource("1_wrq6g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n8i7"]
+atlas = ExtResource("1_wrq6g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46b7d"]
+atlas = ExtResource("1_wrq6g")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5v5q"]
+atlas = ExtResource("1_wrq6g")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg8pj"]
+atlas = ExtResource("1_wrq6g")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xf43"]
+atlas = ExtResource("1_wrq6g")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8xrb"]
+atlas = ExtResource("2_mqdjj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xjyg"]
+atlas = ExtResource("2_mqdjj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p65ig"]
+atlas = ExtResource("2_mqdjj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ls1a"]
+atlas = ExtResource("2_mqdjj")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e05kc"]
+atlas = ExtResource("2_mqdjj")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujjrv"]
+atlas = ExtResource("3_r6jkf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piubn"]
+atlas = ExtResource("3_r6jkf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeltu"]
+atlas = ExtResource("3_r6jkf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwpfx"]
+atlas = ExtResource("3_r6jkf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uxha3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8n78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n8i7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46b7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5v5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg8pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xf43")
+}],
+"loop": true,
+"name": &"andando",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8xrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xjyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p65ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ls1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e05kc")
+}],
+"loop": true,
+"name": &"morrendo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujjrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_piubn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jeltu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwpfx")
+}],
+"loop": true,
+"name": &"parado",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uyntr"]
+
+[node name="slime_inimigo" type="CharacterBody3D" groups=["inimigos"]]
+script = ExtResource("1_mqdjj")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_uxha3")
+animation = &"andando"
+frame_progress = 0.52363294
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatedSprite3D" groups=["inimigos"]]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+shape = SubResource("BoxShape3D_uyntr")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 5.01
