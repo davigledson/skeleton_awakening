@@ -5,6 +5,10 @@ extends CharacterBody3D
 @onready var camera_pivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
 
+var health = 100
+var max_health = 100
+var bonus_dano = 0
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = 0.003
@@ -22,8 +26,13 @@ var attack_timer = 0.0
 var is_attacking = false
 
 func _ready():
+	# IMPORTANTE: Adicionar ao grupo "player"
+	add_to_group("player")
+	
 	camera_initial_position = camera.position
 	update_camera_zoom()
+	
+	print("🎮 Personagem pronto e adicionado ao grupo 'player'")
 
 func _input(event):
 	# Capturar/liberar mouse com botão esquerdo
@@ -116,24 +125,55 @@ func attack_enemy(inimigo):
 	is_attacking = true
 	attack_timer = ATTACK_COOLDOWN
 	
-	# Calcular direção do inimigo
 	var direction_to_enemy = inimigo.global_position - global_position
 	
-	# Escolher animação baseada na direção
 	if direction_to_enemy.x < 0:
-		# Inimigo à esquerda
 		sprite.flip_h = true
-		sprite.play("atacando_para_esquerda")  # ou "atacando" se for a mesma
+		sprite.play("atacando_para_esquerda")
 	else:
-		# Inimigo à direita
 		sprite.flip_h = false
-		sprite.play("atacando_para_direita")  # ou "atacando" se for a mesma
+		sprite.play("atacando_para_direita")
 	
-	# Dar dano no inimigo
+	# Dar dano com bônus da carta!
+	var dano_total = 10 + bonus_dano
 	if inimigo.has_method("take_damage"):
-		inimigo.take_damage(10)
+		inimigo.take_damage(dano_total)
+		print("⚔️ Ataque! Dano: ", dano_total, " (Base: 10 + Bônus: ", bonus_dano, ")")
 	
-	# Aguardar animação terminar
 	await get_tree().create_timer(0.5).timeout
 	is_attacking = false
 	sprite.play("parado")
+
+func ativar_carta(tipo: int, valor: int):
+	print("✅ Personagem recebeu a carta! Tipo: ", tipo, ", Valor: ", valor)
+
+	match tipo:
+		0: # Ataque (Bônus de Dano)
+			print("⚔️ Buff de dano ativado! Dano extra: +", valor)
+			bonus_dano += valor
+			# Efeito visual opcional (pode adicionar partículas, etc)
+			
+		1: # Cura
+			print("❤️ Cura ativada! Vida recuperada: +", valor)
+			health += valor
+			health = min(health, max_health)  # Não ultrapassar vida máxima
+			print("💚 Vida atual: ", health, "/", max_health)
+			
+		2: # Velocidade (TODO)
+			print("💨 Buff de velocidade ativado! (Implementar lógica)")
+			# Exemplo: aumentar SPEED temporariamente
+			
+		3: # Dano em Área (TODO)
+			print("💥 Dano em área ativado! (Implementar lógica)")
+			# Exemplo: causar dano em todos inimigos próximos
+
+func take_damage(dano: int):
+	health -= dano
+	print("💔 Personagem recebeu ", dano, " de dano! Vida: ", health)
+	
+	if health <= 0:
+		die()
+
+func die():
+	print("☠️ Personagem morreu!")
+	# Adicionar lógica de morte (game over, respawn, etc)

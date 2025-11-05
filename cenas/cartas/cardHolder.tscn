@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlt2fx8y5np1o" path="res://cenas/cartas/cardHolder.gd" id="1_shmd5"]
 
-[node name="CardHolder" type="Container"]
+[node name="CardHolder" type="Container" groups=["CardHolder"]]
 custom_minimum_size = Vector2(105, 136)
 offset_right = 105.0
 offset_bottom = 136.0

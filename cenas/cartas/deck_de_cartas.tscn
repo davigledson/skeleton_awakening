@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://085m0pgrbo2t"]
+[gd_scene load_steps=9 format=3 uid="uid://085m0pgrbo2t"]
 
 [ext_resource type="PackedScene" uid="uid://deotsx23pqaeq" path="res://cenas/cartas/card.tscn" id="1_imruo"]
 [ext_resource type="Script" uid="uid://dihmhps8cwpkg" path="res://cenas/cartas/CardContainer.gd" id="1_xeshw"]
+[ext_resource type="Script" uid="uid://b45rerfjvt0jk" path="res://cenas/cartas/carta_explosao.gd" id="3_iwi6y"]
+[ext_resource type="Script" uid="uid://wuu46tunc151" path="res://cenas/cartas/carta_cura.gd" id="3_r6xlp"]
 [ext_resource type="PackedScene" uid="uid://b6suxxafyeg30" path="res://cenas/cartas/passivas/carta_atk_basico.tscn" id="3_wy276"]
 [ext_resource type="Script" uid="uid://cyf5wvgaw34od" path="res://cenas/cartas/CardPlacement.gd" id="3_yxjxn"]
+[ext_resource type="Script" uid="uid://dxxld8b4o6y62" path="res://cenas/cartas/carta_velocidade.gd" id="4_mmd6q"]
+[ext_resource type="Script" uid="uid://de4bmunpvd2bs" path="res://cenas/cartas/carta_atk_basico.gd" id="4_pei1p"]
 
 [node name="Board" type="Node"]
 
@@ -28,17 +32,21 @@ layout_mode = 2
 [node name="Card3" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
 layout_mode = 2
 
-[node name="Card4" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
+[node name="carta_explosao" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
 layout_mode = 2
+script = ExtResource("3_iwi6y")
 
-[node name="Card5" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
+[node name="carta_velocidade" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
 layout_mode = 2
+script = ExtResource("4_mmd6q")
 
-[node name="Card6" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
+[node name="carta_cura" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
 layout_mode = 2
+script = ExtResource("3_r6xlp")
 
 [node name="carta_atk_basico" parent="UI/CardContainer" instance=ExtResource("3_wy276")]
 layout_mode = 2
+script = ExtResource("4_pei1p")
 
 [node name="CardPlacement" type="Control" parent="UI"]
 layout_mode = 3

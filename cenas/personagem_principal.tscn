@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://bgbivrdb5fqnj"]
+[gd_scene load_steps=33 format=3 uid="uid://bgbivrdb5fqnj"]
 
 [ext_resource type="Texture2D" uid="uid://c0cv5amtc3co5" path="res://imgs_personagens/walk and idle.png" id="1_qsoig"]
 [ext_resource type="Script" uid="uid://qeb6lccbhnjj" path="res://cenas/personagem_principal.gd" id="1_utspe"]
 [ext_resource type="Texture2D" uid="uid://bloglqdx2t5ut" path="res://imgs_personagens/attack and die.png" id="3_ubmgs"]
+[ext_resource type="PackedScene" uid="uid://085m0pgrbo2t" path="res://cenas/cartas/deck_de_cartas.tscn" id="4_8yovt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hm5ns"]
 atlas = ExtResource("1_qsoig")
@@ -225,8 +226,7 @@ script = ExtResource("1_utspe")
 transform = Transform3D(-0.8143919, 0.18580122, 0.5497665, 0.57961094, 0.21376711, 0.78635466, 0.028583802, 0.95905125, -0.2817827, 0.015123243, 0.03985952, 0.100204386)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_7rwpq")
-animation = &"morrendo"
-frame_progress = 0.7357568
+animation = &"atacando_para_direita"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.2, -5.321842e-09, 2.6609213e-09, 5.321842e-09, 0.2, 3.1720685e-16, -2.6609213e-09, -2.4640186e-16, 0.2, 0.01651673, 0.02048549, 0.07023566)
@@ -236,3 +236,7 @@ shape = SubResource("BoxShape3D_utspe")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(0.83247423, 0.26757127, -0.4851722, -0.5538845, 0.37962028, -0.74101305, -0.014092669, 0.8856034, 0.46422783, -0.28699797, -0.35054964, 0.52182615)
+
+[node name="deck_cartas" type="Node" parent="."]
+
+[node name="Board" parent="deck_cartas" instance=ExtResource("4_8yovt")]
