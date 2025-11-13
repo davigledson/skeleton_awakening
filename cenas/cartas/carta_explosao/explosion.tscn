@@ -1,4 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://o2shon2srr65"]
+[gd_scene load_steps=24 format=3 uid="uid://o2shon2srr65"]
+
+[ext_resource type="AudioStream" uid="uid://dols1e4b13pg1" path="res://cenas/cartas/carta_explosao/som_explosao.mp3" id="1_0t0np"]
+[ext_resource type="Script" uid="uid://hy2lgrruoorp" path="res://cenas/cartas/carta_explosao/explosion.gd" id="1_48144"]
 
 [sub_resource type="Curve" id="Curve_5jkll"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -108,11 +111,13 @@ color_ramp = SubResource("GradientTexture1D_hjvrv")
 emission_curve = SubResource("CurveTexture_e81rg")
 
 [node name="explosion" type="Node3D"]
+script = ExtResource("1_48144")
 
 [node name="Debris_destrocos_GPUParticles3D" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 24
 lifetime = 0.5
+one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_s03fx")
@@ -122,6 +127,7 @@ draw_pass_1 = SubResource("CylinderMesh_dla6d")
 emitting = false
 amount = 12
 lifetime = 2.0
+one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_0hebq")
@@ -130,7 +136,11 @@ draw_pass_1 = SubResource("SphereMesh_jetni")
 [node name="Fire_GPUParticles3D" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 12
+one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_x6j48")
 draw_pass_1 = SubResource("SphereMesh_jetni")
+
+[node name="ExplosionSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_0t0np")

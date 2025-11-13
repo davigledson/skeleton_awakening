@@ -151,21 +151,20 @@ func ativar_carta(tipo: int, valor: int):
 		0: # Ataque (Bônus de Dano)
 			print("⚔️ Buff de dano ativado! Dano extra: +", valor)
 			bonus_dano += valor
-			# Efeito visual opcional (pode adicionar partículas, etc)
 			
 		1: # Cura
 			print("❤️ Cura ativada! Vida recuperada: +", valor)
 			health += valor
-			health = min(health, max_health)  # Não ultrapassar vida máxima
+			health = min(health, max_health)
 			print("💚 Vida atual: ", health, "/", max_health)
 			
-		2: # Velocidade (TODO)
+		2: # Velocidade
 			print("💨 Buff de velocidade ativado! (Implementar lógica)")
-			# Exemplo: aumentar SPEED temporariamente
 			
-		3: # Dano em Área (TODO)
-			print("💥 Dano em área ativado! (Implementar lógica)")
-			# Exemplo: causar dano em todos inimigos próximos
+		3: # Dano em Área
+			print("💥 Carta de dano em área recebida! (Efeito visual controlado pela carta)")
+			# O efeito visual é spawnado pela própria carta
+			# Aqui só registramos que recebemos o comando
 
 func take_damage(dano: int):
 	health -= dano
@@ -177,3 +176,20 @@ func take_damage(dano: int):
 func die():
 	print("☠️ Personagem morreu!")
 	# Adicionar lógica de morte (game over, respawn, etc)
+
+func dano_em_area_posicao(dano: int, posicao_centro: Vector3):
+	"""Causa dano em área em uma posição específica"""
+	print("💥 Causando ", dano, " de dano em área na posição: ", posicao_centro)
+	
+	var inimigos = get_tree().get_nodes_in_group("inimigos")
+	var inimigos_atingidos = 0
+	
+	for inimigo in inimigos:
+		var distancia = posicao_centro.distance_to(inimigo.global_position)
+		if distancia <= 5.0:  # Raio de 5 metros da explosão
+			if inimigo.has_method("take_damage"):
+				inimigo.take_damage(dano)
+				inimigos_atingidos += 1
+				print("  💥 Inimigo atingido a ", distancia, "m de distância")
+	
+	print("💥 Total de ", inimigos_atingidos, " inimigos atingidos!")
