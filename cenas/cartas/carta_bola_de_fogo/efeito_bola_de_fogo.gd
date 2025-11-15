@@ -1,4 +1,4 @@
-# efeito_agua.gd
+# efeito_bola_de_fogo.gd
 extends Node3D
 
 @onready var sprite = $AnimatedSprite3D
@@ -17,9 +17,7 @@ var tempo_viagem = 0.0
 var duracao_viagem = 1.5
 
 func _ready():
-	print("Bola _ready() chamado")
-	
-	# NÃO tocar som aqui - só depois de configurar!
+	print("Bola de FOGO _ready() chamado")
 	
 	# Começar animação
 	if sprite and sprite.sprite_frames:
@@ -37,10 +35,9 @@ func configurar(inimigo_alvo: Node3D, valor_dano: int):
 	alvo = inimigo_alvo
 	dano = valor_dano
 	
-	# TOCAR SOM AGORA (depois de configurar)
+	# TOCAR SOM
 	if som:
 		som.play()
-		print("  🔊 Som da bola de água!")
 	
 	# Capturar posição inicial
 	posicao_inicial = global_position
@@ -54,7 +51,7 @@ func configurar(inimigo_alvo: Node3D, valor_dano: int):
 	print("  Dano: ", dano)
 
 func calcular_ponto_intermediario():
-	"""Calcula o ponto intermediário para criar a curva LATERAL de 90 graus"""
+	"""Calcula o ponto intermediário para criar a curva LATERAL"""
 	if not alvo:
 		return
 	
@@ -97,7 +94,7 @@ func _process(delta):
 	var progresso = min(tempo_viagem / duracao_viagem, 1.0)
 	
 	# Curva de Bézier
-	var posicao_alvo_atual = alvo.global_position + Vector3(0, 0.1, 0)
+	var posicao_alvo_atual = alvo.global_position + Vector3(0, 0.3, 0)
 	var nova_posicao = bezier_quadratico(posicao_inicial, ponto_intermediario, posicao_alvo_atual, progresso)
 	
 	global_position = nova_posicao
@@ -116,36 +113,32 @@ func impacto():
 		return
 	
 	atingiu = true
-	print("💥 IMPACTO!")
+	print("🔥 IMPACTO DE FOGO!")
 	
 	# Parar de processar movimento
 	set_process(false)
 	
-	# Animação de impacto
-	if sprite and sprite.sprite_frames:
-		if sprite.sprite_frames.has_animation("impacto"):
-			sprite.play("impacto")
-			print("  Tocando animacao 'impacto'")
-	
-	# === NOVO: APLICAR EFEITO DE ATORDOAMENTO ===
+	# === APLICAR EFEITO DE QUEIMADURA ===
 	if alvo and is_instance_valid(alvo):
-		# Causar dano
+		# Causar dano inicial
 		if alvo.has_method("take_damage"):
 			alvo.take_damage(dano)
-			print("  💧 Causou ", dano, " de dano!")
+			print("  🔥 Causou ", dano, " de dano inicial!")
 		
-		# Aplicar atordoamento (zonzo)
-		if alvo.has_method("aplicar_atordoamento"):
-			alvo.aplicar_atordoamento(2.5)  # 2.5 segundos zonzo
-			print("  😵 Inimigo ficou ZONZO!")
+		# Aplicar QUEIMADURA (dano ao longo do tempo)
+		if alvo.has_method("aplicar_queimadura"):
+			# 3 segundos de queimadura, 3 de dano por tick (0.5s)
+			# Total: 3 / 0.5 = 6 ticks × 3 dano = 18 dano adicional
+			alvo.aplicar_queimadura(3.0, 3)
+			print("  🔥 Inimigo está QUEIMANDO!")
 		
-		# OPCIONAL: Empurrar para trás
-		# var direcao_empurrao = (alvo.global_position - posicao_inicial).normalized()
-		# if alvo.has_method("empurrar"):
-		#     alvo.empurrar(direcao_empurrao, 2.0)
-		#     print("  👊 Inimigo empurrado!")
+		# OPCIONAL: Empurrar para trás com menos força
+		var direcao_empurrao = (alvo.global_position - posicao_inicial).normalized()
+		if alvo.has_method("empurrar"):
+			alvo.empurrar(direcao_empurrao, 1.5)
+			print("  👊 Inimigo empurrado pelo impacto!")
 	
 	# Destruir após animação
 	await get_tree().create_timer(0.8).timeout
-	print("  Destruindo bola")
+	print("  Destruindo bola de fogo")
 	queue_free()

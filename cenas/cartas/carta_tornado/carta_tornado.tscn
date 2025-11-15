@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://crlawg3vlu4b"]
+
+[ext_resource type="Script" uid="uid://d1geeuylnxgx4" path="res://cenas/cartas/carta_tornado/carta_tornado.gd" id="1_4jmo8"]
+[ext_resource type="Texture2D" uid="uid://d1b5p3c4hmifx" path="res://cenas/cartas/carta_tornado/img_tornado.png" id="2_mijq3"]
+[ext_resource type="PackedScene" uid="uid://bo68yna1d5u2m" path="res://cenas/cartas/carta_tornado/efeito_tornado.tscn" id="3_con2f"]
+
+[sub_resource type="Animation" id="Animation_7k3b2"]
+resource_name = "DeSelect"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(52, 20), Vector2(52, 67)]
+}
+
+[sub_resource type="Animation" id="Animation_7wupx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(52, 67)]
+}
+
+[sub_resource type="Animation" id="Animation_0gtgv"]
+resource_name = "Select"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(52, 67), Vector2(52, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blu37"]
+_data = {
+&"DeSelect": SubResource("Animation_7k3b2"),
+&"RESET": SubResource("Animation_7wupx"),
+&"Select": SubResource("Animation_0gtgv")
+}
+
+[node name="carta_tornado" type="Container"]
+custom_minimum_size = Vector2(105, 136)
+offset_right = 133.0
+offset_bottom = 158.0
+script = ExtResource("1_4jmo8")
+
+[node name="CardBacks" type="Sprite2D" parent="."]
+position = Vector2(52, 67)
+scale = Vector2(0.3, 0.29)
+texture = ExtResource("2_mijq3")
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_blu37")
+}
+
+[node name="efeito" type="Node3D" parent="."]
+
+[node name="EfeitoTornado" parent="efeito" instance=ExtResource("3_con2f")]
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

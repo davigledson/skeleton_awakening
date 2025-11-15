@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://085m0pgrbo2t"]
+[gd_scene load_steps=12 format=3 uid="uid://085m0pgrbo2t"]
 
 [ext_resource type="PackedScene" uid="uid://deotsx23pqaeq" path="res://cenas/cartas/card.tscn" id="1_imruo"]
 [ext_resource type="Script" uid="uid://dihmhps8cwpkg" path="res://cenas/cartas/CardContainer.gd" id="1_xeshw"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://de4bmunpvd2bs" path="res://cenas/cartas/carta_atk_basico.gd" id="4_pei1p"]
 [ext_resource type="PackedScene" uid="uid://10ecwrpd6q0t" path="res://cenas/cartas/carta_explosao/carta_explosao.tscn" id="7_mmd6q"]
 [ext_resource type="PackedScene" uid="uid://bcnxk4wv1dos6" path="res://cenas/cartas/carta_bola_de_agua/carta_magia_de_agua.tscn" id="8_mmd6q"]
+[ext_resource type="PackedScene" uid="uid://b1v0g73umehdk" path="res://cenas/cartas/carta_bola_de_fogo/carta_bola_de_fogo.tscn" id="8_y5q5f"]
+[ext_resource type="PackedScene" uid="uid://crlawg3vlu4b" path="res://cenas/cartas/carta_tornado/carta_tornado.tscn" id="9_icnr0"]
 
 [node name="Board" type="Node"]
 
@@ -23,15 +25,6 @@ grow_vertical = 2
 theme_override_constants/separation = -20
 alignment = 1
 script = ExtResource("1_xeshw")
-
-[node name="Card1" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
-layout_mode = 2
-
-[node name="Card2" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
-layout_mode = 2
-
-[node name="Card3" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
-layout_mode = 2
 
 [node name="carta_velocidade" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
 layout_mode = 2
@@ -50,6 +43,12 @@ layout_mode = 2
 [node name="carta_atk_basico" parent="UI/CardContainer" instance=ExtResource("3_wy276")]
 layout_mode = 2
 script = ExtResource("4_pei1p")
+
+[node name="carta_bola_de_fogo" parent="UI/CardContainer" instance=ExtResource("8_y5q5f")]
+layout_mode = 2
+
+[node name="carta_tornado" parent="UI/CardContainer" instance=ExtResource("9_icnr0")]
+layout_mode = 2
 
 [node name="carta_magia_de_agua" parent="UI/CardContainer" instance=ExtResource("8_mmd6q")]
 layout_mode = 2

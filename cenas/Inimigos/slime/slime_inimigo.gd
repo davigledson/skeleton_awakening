@@ -1,65 +1,109 @@
-# slime_inimigo.gd
-# Inimigo Slime - Estende a classe base
+# slime_inimigo.gd - VERSÃO SIMPLES
+# Movimento pulante mais simples e direto
 extends BaseInimigo
 
-# ===== CONFIGURAÇÃO NO _ready() =====
+# ===== VARIÁVEIS DE MOVIMENTO PULANTE =====
+var tempo_entre_pulos = 0.8  # Pula a cada 0.8 segundos
+var altura_pulo = 2.0  # Altura do pulo (quanto mais alto, maior o pulo)
+var distancia_pulo = 3.0  # Distância horizontal do pulo
+var timer_pulo = 0.0
+var esta_no_ar = false
+
 func _ready():
-	# Configurar estatísticas específicas do Slime
+	# Configurar estatísticas do Slime
 	max_health = 30
-	move_speed = 1.0
+	move_speed = 0.0  # Não usa velocidade contínua, só pulos!
 	attack_damage = 5
-	attack_range = 1.5
 	
-	# Configurar nomes das animações do Slime
+	# Animações
 	anim_idle = "parado"
 	anim_walk = "andando"
-	anim_attack = "atacando"
 	anim_die = "morrendo"
-	anim_stunned = "parado"  # Slime usa mesma animação de parado quando zonzo
-	
-	# Slime NÃO tem animação específica de atordoamento
 	tem_animacao_atordoamento = false
-	
-	# Tempo da animação de morte do Slime
 	duracao_morte = 1.0
 	
-	# Chamar _ready() da classe base (IMPORTANTE!)
 	super._ready()
 
-# ===== HOOKS CUSTOMIZADOS (OPCIONAL) =====
-
-# Chamado quando o inimigo termina de inicializar
 func on_inimigo_ready():
-	print("🟢 Slime pronto para atacar!")
+	print("🟢 Slime pulante pronto!")
 
-# Permite adicionar lógica extra ao movimento
+# Sobrescrever movimento completamente
+func processar_movimento(delta: float):
+	"""Movimento por PULOS em vez de deslizar"""
+	timer_pulo -= delta
+	
+	# Calcular direção do alvo
+	var direction = (nav_agent.get_next_path_position() - global_position).normalized()
+	
+	# Virar sprite
+	if anim_sprite and direction.x != 0:
+		anim_sprite.flip_h = direction.x < 0
+	
+	# Verificar se está no chão
+	if is_on_floor():
+		esta_no_ar = false
+		
+		# Hora de pular?
+		if timer_pulo <= 0.0:
+			pular(direction)
+			timer_pulo = tempo_entre_pulos
+		else:
+			# Esperando para pular
+			if anim_sprite:
+				anim_sprite.play(anim_idle)
+			velocity = Vector3.ZERO
+	else:
+		# Está no ar
+		esta_no_ar = true
+		if anim_sprite:
+			anim_sprite.play(anim_walk)
+		
+		# Aplicar gravidade
+		velocity.y -= 9.8 * delta
+	
+	move_and_slide()
+
+func pular(direction: Vector3):
+	"""Faz o slime pular na direção do alvo"""
+	print("  🟢 *BOING!*")
+	
+	# Velocidade vertical (altura do pulo)
+	velocity.y = altura_pulo
+	
+	# Velocidade horizontal (distância do pulo)
+	velocity.x = direction.x * distancia_pulo
+	velocity.z = direction.z * distancia_pulo
+	
+	# Efeito visual: comprimir antes de pular
+	if anim_sprite:
+		# Squash (comprimir)
+		anim_sprite.scale = Vector3(1.3, 0.7, 1.0)
+		
+		# Voltar ao normal após 0.1s
+		await get_tree().create_timer(0.1).timeout
+		if anim_sprite:
+			anim_sprite.scale = Vector3.ONE
+
+# Movimento customizado (não usado nesta versão)
 func on_movimento_customizado(delta: float, direction: Vector3):
-	# Slime poderia ter um movimento "pulante", por exemplo
-	# Por enquanto, usa o movimento padrão
 	pass
 
-# Reage ao receber dano
 func on_dano_recebido(damage: int):
-	# Slime poderia fazer um som ou efeito especial ao ser atingido
 	print("  🟢 *squish* (som de slime)")
 
-# Customiza o atordoamento
 func on_atordoado(duracao: float):
-	# Slime poderia ficar "derretido" quando atordoado
 	print("  🟢 Slime ficou gelatinoso!")
+	# Quando atordoado, não pula
+	timer_pulo = duracao
 
-# Reage a empurrões
+func on_queimando(duracao: float, dano_por_tick: int):
+	print("  🟢 Slime está DERRETENDO!")
+
 func on_empurrado(direcao: Vector3, forca: float):
-	# Slime poderia esticar na direção do empurrão
 	print("  🟢 Slime esticou!")
 
-# Lógica especial ao morrer
 func on_morte():
 	print("  🟢 Slime dissolveu!")
-	# Poderia spawnar partículas de gosma, por exemplo
 
-# Última chance antes de destruir (spawnar loot)
 func on_antes_destruir():
-	# Slime poderia dropar itens aqui
-	print("  🟢 Slime dropou... nada por enquanto!")
-	# TODO: spawnar_loot()
+	print("  🟢 Slime dropou gosma!")

@@ -1,4 +1,4 @@
-# BaseInimigo.gd
+# base_inimigo.gd
 # SCRIPT BASE para todos os inimigos do jogo
 extends CharacterBody3D
 class_name BaseInimigo
@@ -34,6 +34,13 @@ var stun_timer: float = 0.0
 # Efeito visual de zonzo
 var wobble_time: float = 0.0
 var original_rotation: float = 0.0
+
+# Efeito de queimadura (dano ao longo do tempo)
+var is_burning: bool = false
+var burn_timer: float = 0.0
+var burn_damage_per_tick: int = 0
+var burn_tick_timer: float = 0.0
+var burn_tick_interval: float = 0.5  # Dano a cada 0.5 segundos
 
 # ===== INICIALIZAÇÃO =====
 func _ready():

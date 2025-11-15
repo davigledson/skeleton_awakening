@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1v0g73umehdk"]
+
+[ext_resource type="Script" uid="uid://b04177hl88rkp" path="res://cenas/cartas/carta_bola_de_fogo/carta_bola_de_fogo.gd" id="1_xqqjn"]
+[ext_resource type="Texture2D" uid="uid://dwjwvtsnfhw60" path="res://cenas/cartas/carta_bola_de_fogo/img_bola_de_fogo.png" id="2_pw7s7"]
+[ext_resource type="PackedScene" uid="uid://cipcyeet0a81e" path="res://cenas/cartas/carta_bola_de_fogo/efeito_bola_de_fogo.tscn" id="3_pw7s7"]
+
+[sub_resource type="Animation" id="Animation_7k3b2"]
+resource_name = "DeSelect"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(52, 20), Vector2(52, 67)]
+}
+
+[sub_resource type="Animation" id="Animation_7wupx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(52, 67)]
+}
+
+[sub_resource type="Animation" id="Animation_0gtgv"]
+resource_name = "Select"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(52, 67), Vector2(52, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blu37"]
+_data = {
+&"DeSelect": SubResource("Animation_7k3b2"),
+&"RESET": SubResource("Animation_7wupx"),
+&"Select": SubResource("Animation_0gtgv")
+}
+
+[node name="carta_bola_de_fogo" type="Container"]
+custom_minimum_size = Vector2(105, 136)
+offset_right = 133.0
+offset_bottom = 158.0
+script = ExtResource("1_xqqjn")
+
+[node name="CardBacks" type="Sprite2D" parent="."]
+position = Vector2(52, 67)
+scale = Vector2(0.3, 0.29)
+texture = ExtResource("2_pw7s7")
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_blu37")
+}
+
+[node name="efeito" type="Node3D" parent="."]
+
+[node name="efeito_bola_de_fogo" parent="efeito" instance=ExtResource("3_pw7s7")]
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
