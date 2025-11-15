@@ -108,7 +108,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_4k5bc")
 }],
 "loop": true,
-"name": &"encerrando",
+"name": &"ataque",
 "speed": 12.0
 }, {
 "frames": [{
@@ -155,7 +155,7 @@ billboard = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_xxwww")
 animation = &"formacao"
-frame_progress = 0.6919749
+frame_progress = 0.79202163
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

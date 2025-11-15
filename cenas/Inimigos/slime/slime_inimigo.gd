@@ -65,7 +65,7 @@ func processar_movimento(delta: float):
 
 func pular(direction: Vector3):
 	"""Faz o slime pular na direção do alvo"""
-	print("  🟢 *BOING!*")
+	
 	
 	# Velocidade vertical (altura do pulo)
 	velocity.y = altura_pulo
@@ -84,26 +84,9 @@ func pular(direction: Vector3):
 		if anim_sprite:
 			anim_sprite.scale = Vector3.ONE
 
-# Movimento customizado (não usado nesta versão)
-func on_movimento_customizado(delta: float, direction: Vector3):
-	pass
 
-func on_dano_recebido(damage: int):
-	print("  🟢 *squish* (som de slime)")
 
 func on_atordoado(duracao: float):
 	print("  🟢 Slime ficou gelatinoso!")
 	# Quando atordoado, não pula
 	timer_pulo = duracao
-
-func on_queimando(duracao: float, dano_por_tick: int):
-	print("  🟢 Slime está DERRETENDO!")
-
-func on_empurrado(direcao: Vector3, forca: float):
-	print("  🟢 Slime esticou!")
-
-func on_morte():
-	print("  🟢 Slime dissolveu!")
-
-func on_antes_destruir():
-	print("  🟢 Slime dropou gosma!")

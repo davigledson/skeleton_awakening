@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://085m0pgrbo2t"]
+[gd_scene load_steps=13 format=3 uid="uid://085m0pgrbo2t"]
 
 [ext_resource type="PackedScene" uid="uid://deotsx23pqaeq" path="res://cenas/cartas/card.tscn" id="1_imruo"]
 [ext_resource type="Script" uid="uid://dihmhps8cwpkg" path="res://cenas/cartas/CardContainer.gd" id="1_xeshw"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bcnxk4wv1dos6" path="res://cenas/cartas/carta_bola_de_agua/carta_magia_de_agua.tscn" id="8_mmd6q"]
 [ext_resource type="PackedScene" uid="uid://b1v0g73umehdk" path="res://cenas/cartas/carta_bola_de_fogo/carta_bola_de_fogo.tscn" id="8_y5q5f"]
 [ext_resource type="PackedScene" uid="uid://crlawg3vlu4b" path="res://cenas/cartas/carta_tornado/carta_tornado.tscn" id="9_icnr0"]
+[ext_resource type="PackedScene" uid="uid://dk05dmpsqfdn8" path="res://cenas/cartas/carta_magia_negra/carta_magia_negra.tscn" id="11_x7w0l"]
 
 [node name="Board" type="Node"]
 
@@ -51,6 +52,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="carta_magia_de_agua" parent="UI/CardContainer" instance=ExtResource("8_mmd6q")]
+layout_mode = 2
+
+[node name="carta_magia_negra" parent="UI/CardContainer" instance=ExtResource("11_x7w0l")]
 layout_mode = 2
 
 [node name="CardPlacement" type="Control" parent="UI/CardContainer"]

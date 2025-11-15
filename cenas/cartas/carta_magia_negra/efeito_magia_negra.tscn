@@ -1,0 +1,150 @@
+[gd_scene load_steps=22 format=3 uid="uid://noa3ycir08c1"]
+
+[ext_resource type="Script" uid="uid://18v5vgegvaph" path="res://cenas/cartas/carta_magia_negra/efeito_magia_negra.gd" id="1_waw5m"]
+[ext_resource type="Texture2D" uid="uid://dh5bwmby6vtqg" path="res://cenas/cartas/carta_magia_negra/sprites/magia_negra.png" id="2_1w2ee"]
+[ext_resource type="AudioStream" uid="uid://8f68dnji1dq3" path="res://cenas/cartas/carta_magia_negra/magia_negra.mp3" id="3_pn10n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk41m"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(0, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4kn1"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(40, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3m6n"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(80, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhbhf"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(120, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c22n"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(200, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg8f1"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(160, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvp43"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(240, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2237t"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(280, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu4al"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(320, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yit8u"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(360, 0, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpcpw"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(0, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnaab"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(40, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghva2"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(80, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b62pe"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(120, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyvux"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(160, 32, 40, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cm60"]
+atlas = ExtResource("2_1w2ee")
+region = Rect2(200, 32, 40, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i6124"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jk41m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4kn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3m6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhbhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c22n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg8f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvp43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2237t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu4al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yit8u")
+}],
+"loop": true,
+"name": &"ataque",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpcpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnaab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghva2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b62pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyvux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cm60")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 12.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eb1sv"]
+margin = 0.0
+
+[node name="efeito_magia_negra" type="Node3D"]
+script = ExtResource("1_waw5m")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_i6124")
+animation = &"ataque"
+frame_progress = 0.34760076
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+shape = SubResource("BoxShape3D_eb1sv")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_pn10n")
