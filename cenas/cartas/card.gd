@@ -83,15 +83,15 @@ func soltar_carta():
 	is_dragging = false
 	Game.cardSelected = false
 	
-	print("✅ Carta jogada: ", carta_nome)
+	print("Carta jogada: ", carta_nome)
 	
-	# Ativar efeito (pode ser assíncrono)
-	ativar_efeito()
+	# Ativar efeito (AGUARDAR se for assíncrono)
+	await ativar_efeito()
 	
 	# Esperar um pouco antes de destruir (dar tempo para efeitos iniciarem)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.5).timeout
 	
-	print("🗑️ Destruindo carta: ", carta_nome)
+	print("Destruindo carta: ", carta_nome)
 	queue_free()
 
 # MÉTODO PRINCIPAL - Classes filhas DEVEM sobrescrever

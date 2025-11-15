@@ -139,9 +139,9 @@ sprite_frames = SubResource("SpriteFrames_uxha3")
 animation = &"andando"
 frame_progress = 0.52363294
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatedSprite3D" groups=["inimigos"]]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-shape = SubResource("BoxShape3D_uyntr")
-
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_max_distance = 5.01
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_uyntr")

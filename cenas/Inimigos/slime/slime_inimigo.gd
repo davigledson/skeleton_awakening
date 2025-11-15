@@ -1,74 +1,65 @@
 # slime_inimigo.gd
-extends CharacterBody3D
+# Inimigo Slime - Estende a classe base
+extends BaseInimigo
 
-@onready var nav_agent = $NavigationAgent3D
-@onready var anim_sprite = $AnimatedSprite3D
-
-var SPEED = 1.0
-var health = 30
-var is_dead = false  # Flag para saber se já morreu
-
+# ===== CONFIGURAÇÃO NO _ready() =====
 func _ready():
-	add_to_group("inimigos")
-	nav_agent.target_desired_distance = 0.1
+	# Configurar estatísticas específicas do Slime
+	max_health = 30
+	move_speed = 1.0
+	attack_damage = 5
+	attack_range = 1.5
+	
+	# Configurar nomes das animações do Slime
+	anim_idle = "parado"
+	anim_walk = "andando"
+	anim_attack = "atacando"
+	anim_die = "morrendo"
+	anim_stunned = "parado"  # Slime usa mesma animação de parado quando zonzo
+	
+	# Slime NÃO tem animação específica de atordoamento
+	tem_animacao_atordoamento = false
+	
+	# Tempo da animação de morte do Slime
+	duracao_morte = 1.0
+	
+	# Chamar _ready() da classe base (IMPORTANTE!)
+	super._ready()
 
-func _physics_process(delta):
-	# Se morreu, não fazer mais nada
-	if is_dead:
-		return
-	
-	# FAZER SPRITE OLHAR PARA CÂMERA
-	var camera = get_viewport().get_camera_3d()
-	if camera:
-		anim_sprite.look_at(camera.global_position, Vector3.UP)
-	
-	# Calcular direção
-	var direction = (nav_agent.get_next_path_position() - global_position).normalized()
-	
-	# Animação andando
-	anim_sprite.play("andando")
-	
-	# Virar sprite
-	if direction.x != 0:
-		anim_sprite.flip_h = direction.x < 0
-	
-	# Mover
-	velocity = direction * SPEED
-	move_and_slide()
+# ===== HOOKS CUSTOMIZADOS (OPCIONAL) =====
 
-func update_target_location(target_location):
-	if not is_dead:  # Só perseguir se não estiver morto
-		nav_agent.target_position = target_location
+# Chamado quando o inimigo termina de inicializar
+func on_inimigo_ready():
+	print("🟢 Slime pronto para atacar!")
 
-func take_damage(damage: int):
-	if is_dead:  # Não receber dano se já morreu
-		return
-	
-	health -= damage
-	print("Inimigo recebeu ", damage, " de dano! Vida: ", health)
-	
-	# Efeito visual (piscar vermelho)
-	anim_sprite.modulate = Color.RED
-	await get_tree().create_timer(0.1).timeout
-	anim_sprite.modulate = Color.WHITE
-	
-	# Morrer se vida acabar
-	if health <= 0:
-		die()
+# Permite adicionar lógica extra ao movimento
+func on_movimento_customizado(delta: float, direction: Vector3):
+	# Slime poderia ter um movimento "pulante", por exemplo
+	# Por enquanto, usa o movimento padrão
+	pass
 
-func die():
-	is_dead = true
-	print("Inimigo morreu!")
-	
-	# Parar movimento
-	velocity = Vector3.ZERO
-	
-	# Tocar animação de morte
-	anim_sprite.play("morrendo")
-	
-	# Aguardar a animação terminar antes de remover
-	# Ajuste o tempo conforme a duração da sua animação
-	await get_tree().create_timer(1.0).timeout  # 1 segundo - ajuste conforme necessário
-	
-	# Remover o inimigo da cena
-	queue_free()
+# Reage ao receber dano
+func on_dano_recebido(damage: int):
+	# Slime poderia fazer um som ou efeito especial ao ser atingido
+	print("  🟢 *squish* (som de slime)")
+
+# Customiza o atordoamento
+func on_atordoado(duracao: float):
+	# Slime poderia ficar "derretido" quando atordoado
+	print("  🟢 Slime ficou gelatinoso!")
+
+# Reage a empurrões
+func on_empurrado(direcao: Vector3, forca: float):
+	# Slime poderia esticar na direção do empurrão
+	print("  🟢 Slime esticou!")
+
+# Lógica especial ao morrer
+func on_morte():
+	print("  🟢 Slime dissolveu!")
+	# Poderia spawnar partículas de gosma, por exemplo
+
+# Última chance antes de destruir (spawnar loot)
+func on_antes_destruir():
+	# Slime poderia dropar itens aqui
+	print("  🟢 Slime dropou... nada por enquanto!")
+	# TODO: spawnar_loot()

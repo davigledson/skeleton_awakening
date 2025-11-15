@@ -34,10 +34,10 @@ func ativar_efeito():
 	# Manter a explosão no chão (mesma altura do personagem)
 	posicao_explosao.y = personagem.global_position.y + 0.5
 	
-	print("📍 Personagem em: ", personagem.global_position)
-	print("📍 Rotação Y: ", rad_to_deg(rotacao_y), "°")
-	print("📍 Direção frente: ", direcao_frente)
-	print("📍 Explosão vai spawnar em: ", posicao_explosao)
+	print(" Personagem em: ", personagem.global_position)
+	print(" Rotação Y: ", rad_to_deg(rotacao_y), "°")
+	print(" Direção frente: ", direcao_frente)
+	print(" Explosão vai spawnar em: ", posicao_explosao)
 	
 	# Spawnar explosão (não esperar)
 	spawnar_explosao(posicao_explosao)
@@ -49,7 +49,7 @@ func ativar_efeito():
 
 func spawnar_explosao(posicao: Vector3):
 	"""Spawna o efeito visual da explosão"""
-	print("🔧 Iniciando spawn da explosão...")
+	print(" Iniciando spawn da explosão...")
 	
 	var efeito_explosao = preload("res://cenas/cartas/carta_explosao/explosion.tscn")
 	var explosao = efeito_explosao.instantiate()
@@ -62,11 +62,11 @@ func spawnar_explosao(posicao: Vector3):
 		return
 	
 	mundo.add_child(explosao)
-	print("✅ Explosão adicionada ao mundo")
+	print(" Explosão adicionada ao mundo")
 	
 	# Posicionar IMEDIATAMENTE
 	explosao.global_position = posicao
-	print("📍 Explosão posicionada em: ", explosao.global_position)
+	print(" Explosão posicionada em: ", explosao.global_position)
 	
 	# Aguardar processo físico completar
 	await get_tree().process_frame
@@ -74,12 +74,12 @@ func spawnar_explosao(posicao: Vector3):
 	
 	# Verificar se ainda existe antes de explodir
 	if not is_instance_valid(explosao):
-		print("❌ Explosão foi destruída antes de explodir!")
+		print(" Explosão foi destruída antes de explodir!")
 		return
 	
 	# Ativar a explosão
 	if explosao.has_method("explode"):
 		explosao.explode()
-		print("💥 Explosão ativada com sucesso!")
+		print(" Explosão ativada com sucesso!")
 	else:
-		print("⚠️ Explosão não tem método explode()!")
+		print(" Explosão não tem método explode()!")

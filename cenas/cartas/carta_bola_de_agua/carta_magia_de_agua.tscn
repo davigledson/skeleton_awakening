@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcnxk4wv1dos6"]
+
+[ext_resource type="Texture2D" uid="uid://3h4ppeeiut21" path="res://cenas/cartas/carta_bola_de_agua/img_carta_agua.png" id="1_herd7"]
+[ext_resource type="Script" uid="uid://dtmha1r3cx3a3" path="res://cenas/cartas/carta_bola_de_agua/carta_magia_de_agua.gd" id="1_jujs3"]
+[ext_resource type="PackedScene" uid="uid://de5og53sf3xhl" path="res://cenas/cartas/carta_bola_de_agua/efeito_agua.tscn" id="3_bun4y"]
+
+[sub_resource type="Animation" id="Animation_7k3b2"]
+resource_name = "DeSelect"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(52, 20), Vector2(52, 67)]
+}
+
+[sub_resource type="Animation" id="Animation_7wupx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(52, 67)]
+}
+
+[sub_resource type="Animation" id="Animation_0gtgv"]
+resource_name = "Select"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardBacks:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(52, 67), Vector2(52, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_blu37"]
+_data = {
+&"DeSelect": SubResource("Animation_7k3b2"),
+&"RESET": SubResource("Animation_7wupx"),
+&"Select": SubResource("Animation_0gtgv")
+}
+
+[node name="carta_magia_de_agua" type="Container"]
+custom_minimum_size = Vector2(105, 136)
+offset_right = 133.0
+offset_bottom = 158.0
+script = ExtResource("1_jujs3")
+
+[node name="CardBacks" type="Sprite2D" parent="."]
+position = Vector2(52, 67)
+scale = Vector2(0.3, 0.29)
+texture = ExtResource("1_herd7")
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_blu37")
+}
+
+[node name="efeito" type="Node3D" parent="."]
+
+[node name="efeito_agua" parent="efeito" instance=ExtResource("3_bun4y")]
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
