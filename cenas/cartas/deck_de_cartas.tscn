@@ -1,11 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://085m0pgrbo2t"]
+[gd_scene load_steps=10 format=3 uid="uid://085m0pgrbo2t"]
 
-[ext_resource type="PackedScene" uid="uid://deotsx23pqaeq" path="res://cenas/cartas/card.tscn" id="1_imruo"]
 [ext_resource type="Script" uid="uid://dihmhps8cwpkg" path="res://cenas/cartas/CardContainer.gd" id="1_xeshw"]
-[ext_resource type="Script" uid="uid://wuu46tunc151" path="res://cenas/cartas/carta_cura.gd" id="3_r6xlp"]
 [ext_resource type="PackedScene" uid="uid://b6suxxafyeg30" path="res://cenas/cartas/passivas/carta_atk_basico.tscn" id="3_wy276"]
 [ext_resource type="Script" uid="uid://cyf5wvgaw34od" path="res://cenas/cartas/CardPlacement.gd" id="3_yxjxn"]
-[ext_resource type="Script" uid="uid://dxxld8b4o6y62" path="res://cenas/cartas/carta_velocidade.gd" id="4_mmd6q"]
 [ext_resource type="Script" uid="uid://de4bmunpvd2bs" path="res://cenas/cartas/carta_atk_basico.gd" id="4_pei1p"]
 [ext_resource type="PackedScene" uid="uid://10ecwrpd6q0t" path="res://cenas/cartas/carta_explosao/carta_explosao.tscn" id="7_mmd6q"]
 [ext_resource type="PackedScene" uid="uid://bcnxk4wv1dos6" path="res://cenas/cartas/carta_bola_de_agua/carta_magia_de_agua.tscn" id="8_mmd6q"]
@@ -26,14 +23,6 @@ grow_vertical = 2
 theme_override_constants/separation = -20
 alignment = 1
 script = ExtResource("1_xeshw")
-
-[node name="carta_velocidade" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
-layout_mode = 2
-script = ExtResource("4_mmd6q")
-
-[node name="carta_cura" parent="UI/CardContainer" instance=ExtResource("1_imruo")]
-layout_mode = 2
-script = ExtResource("3_r6xlp")
 
 [node name="carta_atk_basico2" parent="UI/CardContainer" instance=ExtResource("3_wy276")]
 layout_mode = 2

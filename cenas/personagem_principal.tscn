@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bgbivrdb5fqnj"]
+[gd_scene load_steps=39 format=3 uid="uid://bgbivrdb5fqnj"]
 
 [ext_resource type="Texture2D" uid="uid://c0cv5amtc3co5" path="res://imgs_personagens/walk and idle.png" id="1_qsoig"]
 [ext_resource type="Script" uid="uid://qeb6lccbhnjj" path="res://cenas/personagem_principal.gd" id="1_utspe"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://085m0pgrbo2t" path="res://cenas/cartas/deck_de_cartas.tscn" id="4_8yovt"]
 [ext_resource type="Script" uid="uid://c1fnehdg6orv4" path="res://cenas/Inimigos/spawner_ondas.gd" id="5_2ttfk"]
 [ext_resource type="PackedScene" uid="uid://dsgvv52lpnb4q" path="res://cenas/Inimigos/cogumelo/slime_inimigo.tscn" id="6_2ttfk"]
+[ext_resource type="PackedScene" uid="uid://b0v0psqtjub76" path="res://cenas/cartas/drop_carta/carta_drop.tscn" id="6_nuciy"]
 [ext_resource type="PackedScene" uid="uid://fs6gtdpj1xwd" path="res://cenas/gui/hub_ondas.tscn" id="7_m2v3b"]
 [ext_resource type="PackedScene" uid="uid://c5c5hygfk0cf3" path="res://cenas/gui/hub_vida.tscn" id="8_or1fh"]
 [ext_resource type="AudioStream" uid="uid://bcaqlxl4d308f" path="res://sons/tomar_dano.mp3" id="9_2rm8u"]
@@ -252,10 +253,9 @@ transform = Transform3D(1, 2.9802322e-08, -5.9604645e-08, 0, 1, 0, 0, 0, 0.99999
 [node name="spawner_ondas" type="Node3D" parent="."]
 transform = Transform3D(1, 2.9802322e-08, -2.9802322e-08, 0, 1, 0, 0, 0, 0.99999976, 0, 0, 0)
 script = ExtResource("5_2ttfk")
-raio_spawn_min = 13.0
-altura_spawn = 0.3
+cena_carta_drop = ExtResource("6_nuciy")
 onda1_inimigo_A = ExtResource("6_2ttfk")
-onda1_quantidade_A = 50
+onda1_quantidade_A = 1
 
 [node name="GUI" type="Node" parent="."]
 

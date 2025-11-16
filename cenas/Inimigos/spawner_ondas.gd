@@ -9,13 +9,16 @@ class Onda:
 	var descricao: String
 
 # ===== CONFIGURACOES =====
+@export_group("Drop de Carta")
+@export var cena_carta_drop: PackedScene
+
 @export_group("Controle")
 @export var iniciar_automatico: bool = true
 @export var tempo_entre_ondas: float = 10.0
 
 @export_group("Spawn ao Redor do Personagem")
-@export var raio_spawn_min: float = 8.0   # Distancia minima do personagem
-@export var raio_spawn_max: float = 15.0  # Distancia maxima do personagem
+@export var raio_spawn_min: float = 1.0
+@export var raio_spawn_max: float = 3.0
 @export var altura_spawn: float = 0.0
 
 @export_group("ONDA 1")
@@ -70,15 +73,12 @@ var inimigos_para_spawnar: Array = []
 var timer: float = 0.0
 var estado: String = "aguardando"
 var personagem: Node3D = null
-var total_inimigos_onda_atual: int = 0  # NOVO: Total de inimigos da onda atual
+var total_inimigos_onda_atual: int = 0
 
 func _ready():
 	print("Sistema de Ondas inicializado")
-	
-	# Adicionar ao grupo para o HUD encontrar
 	add_to_group("spawner_ondas")
 	
-	# Buscar personagem
 	await get_tree().process_frame
 	buscar_personagem()
 	
@@ -182,14 +182,17 @@ func iniciar_onda_atual():
 			inimigos_para_spawnar.append(onda.inimigos[i])
 	
 	inimigos_para_spawnar.shuffle()
+	total_inimigos_onda_atual = inimigos_para_spawnar.size()
 	
 	print(onda.descricao, " INICIANDO!")
-	print("  Total: ", inimigos_para_spawnar.size(), " inimigos")
+	print("  Total: ", total_inimigos_onda_atual, " inimigos")
 	print("  Intervalo: ", onda.intervalo, "s")
 
 func _process(delta: float) -> void:
 	if estado == "spawnando":
 		processar_spawn(delta)
+	elif estado == "aguardando_morte":
+		verificar_inimigos_vivos()
 	elif estado == "descansando":
 		processar_descanso(delta)
 
@@ -206,19 +209,34 @@ func processar_spawn(delta: float):
 		spawnar_inimigo(cena)
 		timer = onda.intervalo
 		
-		print("  Spawnou! Restantes: ", inimigos_para_spawnar.size())
-		
+		# Terminou de spawnar todos?
 		if inimigos_para_spawnar.size() == 0:
-			print("Onda ", onda_atual + 1, " completa!")
-			onda_atual += 1
-			
-			if onda_atual < ondas.size():
-				estado = "descansando"
-				timer = tempo_entre_ondas
-				print("  Descanso de ", tempo_entre_ondas, "s...")
-			else:
-				estado = "completo"
-				print("TODAS AS ONDAS COMPLETAS!")
+			print("Todos os inimigos spawnados! Aguardando morte...")
+			estado = "aguardando_morte"
+
+func verificar_inimigos_vivos():
+	"""Verifica se ainda tem inimigos vivos"""
+	var inimigos_vivos = get_tree().get_nodes_in_group("inimigos")
+	
+	if inimigos_vivos.size() == 0:
+		finalizar_onda()
+
+func finalizar_onda():
+	"""Finaliza a onda e dropa carta"""
+	print("Onda ", onda_atual + 1, " completa!")
+	
+	# Dropar carta de recompensa
+	dropar_carta()
+	
+	onda_atual += 1
+	
+	if onda_atual < ondas.size():
+		estado = "descansando"
+		timer = tempo_entre_ondas
+		print("  Descanso de ", tempo_entre_ondas, "s...")
+	else:
+		estado = "completo"
+		print("TODAS AS ONDAS COMPLETAS!")
 
 func processar_descanso(delta: float):
 	"""Processa tempo de descanso entre ondas"""
@@ -230,14 +248,11 @@ func processar_descanso(delta: float):
 
 func spawnar_inimigo(cena: PackedScene):
 	"""Spawna um inimigo ao redor do personagem"""
-	# Instanciar
 	var inimigo = cena.instantiate()
 	
-	# Calcular posicao ao redor do personagem
 	var pos: Vector3
 	
 	if personagem:
-		# Spawnar em circulo ao redor do personagem
 		var angulo = randf() * TAU
 		var distancia = randf_range(raio_spawn_min, raio_spawn_max)
 		
@@ -246,7 +261,6 @@ func spawnar_inimigo(cena: PackedScene):
 		pos.z += sin(angulo) * distancia
 		pos.y = altura_spawn
 	else:
-		# Fallback: usar posicao do spawner
 		var angulo = randf() * TAU
 		var distancia = randf_range(raio_spawn_min, raio_spawn_max)
 		
@@ -255,11 +269,24 @@ func spawnar_inimigo(cena: PackedScene):
 		pos.z += sin(angulo) * distancia
 		pos.y = altura_spawn
 	
-	# Posicionar ANTES de adicionar ao mundo
 	inimigo.position = pos
-	
-	# Adicionar ao mundo usando call_deferred
 	get_tree().current_scene.call_deferred("add_child", inimigo)
+
+func dropar_carta():
+	"""Dropa carta na frente do personagem usando funcao estatica"""
+	if not cena_carta_drop:
+		print("  [AVISO] Nenhuma carta configurada!")
+		return
+	
+	if not personagem:
+		print("  [AVISO] Personagem nao encontrado!")
+		return
+	
+	# Usar funcao estatica do carta_drop.gd
+	var CartaDrop = preload("res://cenas/cartas/drop_carta/carta_drop.gd")
+	CartaDrop.spawnar_carta_na_frente_do_player(cena_carta_drop, personagem)
+	
+	print("Carta dropada na frente do jogador!")
 
 # ===== FUNCOES PUBLICAS =====
 
@@ -298,5 +325,8 @@ func obter_inimigos_restantes() -> int:
 	return inimigos_para_spawnar.size()
 
 func obter_inimigos_vivos() -> int:
-	"""Retorna quantidade de inimigos vivos no mapa"""
 	return get_tree().get_nodes_in_group("inimigos").size()
+
+func obter_total_inimigos_onda() -> int:
+	"""Retorna o total de inimigos da onda atual"""
+	return total_inimigos_onda_atual
