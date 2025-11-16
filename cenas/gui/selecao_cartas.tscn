@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpmuxsmtfhhdc"]
+
+[ext_resource type="Script" uid="uid://gwsl1sajja3g" path="res://cenas/gui/selecao_cartas.gd" id="1_y3w3y"]
+[ext_resource type="FontFile" uid="uid://d17c01tt07uie" path="res://fontes/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_siylq"]
+[ext_resource type="AudioStream" uid="uid://b1rccjryrh4rs" path="res://cenas/gui/menu_selecionar.mp3" id="3_siylq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y73hx"]
+bg_color = Color(0.05490196, 0.5294118, 0.78431374, 1)
+draw_center = false
+
+[node name="SelecaoCartas" type="CanvasLayer"]
+script = ExtResource("1_y3w3y")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.49411765)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 46.0
+offset_right = 761.0
+offset_bottom = 85.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_siylq")
+theme_override_font_sizes/font_size = 32
+text = "ESCOLHA UMA CARTA"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(900, 400)
+layout_mode = 0
+offset_left = 5.0
+offset_right = 1158.0
+offset_bottom = 400.0
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Carta1" type="Button" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(300, 240)
+layout_mode = 2
+size_flags_horizontal = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_siylq")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_y73hx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_y73hx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y73hx")
+text = "Carta 1"
+flat = true
+
+[node name="Carta2" type="Button" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(300, 240)
+layout_mode = 2
+size_flags_horizontal = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_siylq")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_y73hx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_y73hx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y73hx")
+text = "Carta 1"
+flat = true
+
+[node name="Carta3" type="Button" parent="Control/HBoxContainer"]
+custom_minimum_size = Vector2(300, 240)
+layout_mode = 2
+size_flags_horizontal = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_siylq")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_y73hx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_y73hx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y73hx")
+text = "Carta 1"
+flat = true
+
+[node name="som_select" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_siylq")
+max_distance = 10.0
+doppler_tracking = 1
+
+[node name="som_hover" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_siylq")
+max_distance = 10.0
+doppler_tracking = 1

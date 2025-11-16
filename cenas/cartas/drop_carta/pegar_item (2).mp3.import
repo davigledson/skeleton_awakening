@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bwbrx01j2w6no"
+path="res://.godot/imported/pegar_item (2).mp3-c519704cf65400867bf69dc467fcff19.mp3str"
+
+[deps]
+
+source_file="res://cenas/cartas/drop_carta/pegar_item (2).mp3"
+dest_files=["res://.godot/imported/pegar_item (2).mp3-c519704cf65400867bf69dc467fcff19.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
