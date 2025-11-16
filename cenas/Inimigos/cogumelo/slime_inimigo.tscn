@@ -1,9 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://dsgvv52lpnb4q"]
+[gd_scene load_steps=24 format=3 uid="uid://dsgvv52lpnb4q"]
 
 [ext_resource type="Script" uid="uid://conx5ipe4sgu1" path="res://cenas/Inimigos/slime/slime_inimigo.gd" id="1_mqdjj"]
 [ext_resource type="Texture2D" uid="uid://bl56jp73eoejc" path="res://cenas/Inimigos/slime/slime_run.png" id="1_wrq6g"]
 [ext_resource type="Texture2D" uid="uid://rb4qxg037k64" path="res://cenas/Inimigos/slime/slime_die.png" id="2_mqdjj"]
 [ext_resource type="Texture2D" uid="uid://bw6w85y5260ww" path="res://cenas/Inimigos/slime/slime_idle.png" id="3_r6jkf"]
+[ext_resource type="AudioStream" uid="uid://b5bgq4h6qifnp" path="res://cenas/Inimigos/slime/slime_pulo.mp3" id="5_r6jkf"]
+[ext_resource type="AudioStream" uid="uid://dmchqvt8oqdcs" path="res://cenas/Inimigos/slime/slime_morte.wav" id="6_n8n78"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8n78"]
 atlas = ExtResource("1_wrq6g")
@@ -145,3 +147,15 @@ path_max_distance = 5.01
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_uyntr")
+
+[node name="sons" type="Node3D" parent="."]
+
+[node name="som_pulo" type="AudioStreamPlayer3D" parent="sons"]
+stream = ExtResource("5_r6jkf")
+max_distance = 10.0
+doppler_tracking = 1
+
+[node name="som_morte" type="AudioStreamPlayer3D" parent="sons"]
+stream = ExtResource("6_n8n78")
+max_distance = 10.0
+doppler_tracking = 1

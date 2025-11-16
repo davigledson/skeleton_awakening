@@ -1,21 +1,23 @@
-# slime_inimigo.gd - VERSÃO SIMPLES
-# Movimento pulante mais simples e direto
+# slime_inimigo.gd
 extends BaseInimigo
 
-# ===== VARIÁVEIS DE MOVIMENTO PULANTE =====
-var tempo_entre_pulos = 0.8  # Pula a cada 0.8 segundos
-var altura_pulo = 2.0  # Altura do pulo (quanto mais alto, maior o pulo)
-var distancia_pulo = 3.0  # Distância horizontal do pulo
+@onready var som_pulo = $sons/som_pulo
+@onready var som_morte = $sons/som_morte
+
+var tempo_entre_pulos = 0.8
+var altura_pulo = 2.0
+var distancia_pulo = 3.0
 var timer_pulo = 0.0
 var esta_no_ar = false
 
+var cooldown_dano = 1.0
+var timer_cooldown_dano = 0.0
+
 func _ready():
-	# Configurar estatísticas do Slime
 	max_health = 30
-	move_speed = 0.0  # Não usa velocidade contínua, só pulos!
+	move_speed = 0.0
 	attack_damage = 5
 	
-	# Animações
 	anim_idle = "parado"
 	anim_walk = "andando"
 	anim_die = "morrendo"
@@ -24,69 +26,82 @@ func _ready():
 	
 	super._ready()
 
-func on_inimigo_ready():
-	print("🟢 Slime pulante pronto!")
+func _physics_process(delta: float) -> void:
+	if timer_cooldown_dano > 0:
+		timer_cooldown_dano -= delta
+	
+	super._physics_process(delta)
+	verificar_colisao_jogador()
 
-# Sobrescrever movimento completamente
+func verificar_colisao_jogador():
+	if is_dead or timer_cooldown_dano > 0:
+		return
+	
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if collider and collider.is_in_group("player"):
+			atacar_jogador(collider)
+			return
+
+func atacar_jogador(player: Node3D):
+	timer_cooldown_dano = cooldown_dano
+	
+	if player.has_method("take_damage"):
+		player.take_damage(attack_damage, global_position)
+	
+	if anim_sprite:
+		anim_sprite.modulate = Color(0.5, 1.0, 0.5)
+		await get_tree().create_timer(0.2).timeout
+		if anim_sprite:
+			anim_sprite.modulate = Color.WHITE
+
 func processar_movimento(delta: float):
-	"""Movimento por PULOS em vez de deslizar"""
 	timer_pulo -= delta
 	
-	# Calcular direção do alvo
 	var direction = (nav_agent.get_next_path_position() - global_position).normalized()
 	
-	# Virar sprite
 	if anim_sprite and direction.x != 0:
 		anim_sprite.flip_h = direction.x < 0
 	
-	# Verificar se está no chão
 	if is_on_floor():
 		esta_no_ar = false
 		
-		# Hora de pular?
 		if timer_pulo <= 0.0:
 			pular(direction)
 			timer_pulo = tempo_entre_pulos
 		else:
-			# Esperando para pular
 			if anim_sprite:
 				anim_sprite.play(anim_idle)
 			velocity = Vector3.ZERO
 	else:
-		# Está no ar
 		esta_no_ar = true
 		if anim_sprite:
 			anim_sprite.play(anim_walk)
 		
-		# Aplicar gravidade
 		velocity.y -= 9.8 * delta
 	
 	move_and_slide()
 
 func pular(direction: Vector3):
-	"""Faz o slime pular na direção do alvo"""
-	
-	
-	# Velocidade vertical (altura do pulo)
 	velocity.y = altura_pulo
-	
-	# Velocidade horizontal (distância do pulo)
 	velocity.x = direction.x * distancia_pulo
 	velocity.z = direction.z * distancia_pulo
 	
-	# Efeito visual: comprimir antes de pular
+	if som_pulo:
+		som_pulo.pitch_scale = randf_range(0.9, 1.1)
+		som_pulo.play()
+	
 	if anim_sprite:
-		# Squash (comprimir)
 		anim_sprite.scale = Vector3(1.3, 0.7, 1.0)
-		
-		# Voltar ao normal após 0.1s
 		await get_tree().create_timer(0.1).timeout
 		if anim_sprite:
 			anim_sprite.scale = Vector3.ONE
 
-
-
 func on_atordoado(duracao: float):
-	print("  🟢 Slime ficou gelatinoso!")
-	# Quando atordoado, não pula
 	timer_pulo = duracao
+
+func on_morte():
+	if som_morte:
+		som_morte.play()
