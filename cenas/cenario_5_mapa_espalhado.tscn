@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dtg0e2wx0yh7x"]
+[gd_scene load_steps=28 format=3 uid="uid://dtg0e2wx0yh7x"]
 
 [ext_resource type="MeshLibrary" uid="uid://c4a3unvyha1gm" path="res://enviro_mesh_library.tres" id="1_enjg1"]
 [ext_resource type="Script" uid="uid://bev583t8rtj1a" path="res://addons/proton_scatter/src/scatter.gd" id="2_0jjcf"]
@@ -27,40 +27,6 @@ agent_height = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ljamw"]
 size = Vector3(1.105957, 1.1450195, 1)
-
-[sub_resource type="Resource" id="Resource_enjg1"]
-script = ExtResource("5_cckrs")
-amount = 75
-restrict_height = true
-reference_frame = 1
-
-[sub_resource type="Resource" id="Resource_0jjcf"]
-script = ExtResource("6_isjtm")
-position = Vector3(0.15, 0, 0.15)
-scale = Vector3(0.1, 0.1, 0.1)
-reference_frame = 2
-
-[sub_resource type="Resource" id="Resource_b302u"]
-script = ExtResource("7_ksrvp")
-iterations = 1
-offset_step = 0.1979999999999933
-consecutive_step_multiplier = 0.7519999999999953
-enabled = false
-restrict_height = true
-
-[sub_resource type="Resource" id="Resource_jbftg"]
-script = ExtResource("8_v5cyn")
-ray_length = 5.0
-ray_offset = 5.0
-remove_points_on_miss = false
-
-[sub_resource type="Resource" id="Resource_cckrs"]
-script = ExtResource("3_b302u")
-stack = Array[ExtResource("4_jbftg")]([SubResource("Resource_enjg1"), SubResource("Resource_0jjcf"), SubResource("Resource_b302u"), SubResource("Resource_jbftg")])
-
-[sub_resource type="Resource" id="Resource_g8bsm"]
-script = ExtResource("11_1g0ku")
-radius = 14.594228
 
 [sub_resource type="Resource" id="Resource_1g0ku"]
 script = ExtResource("5_cckrs")
@@ -121,32 +87,14 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/cenario/GridMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4472337, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1518111, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/cenario/GridMap/StaticBody3D"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, -0.8635125, -0.37139273, 0)
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, -0.8635125, -0.05829549, 0)
 shape = SubResource("BoxShape3D_ljamw")
 
-[node name="pedras" type="Node3D" parent="NavigationRegion3D/cenario/GridMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0.067)
-script = ExtResource("2_0jjcf")
-modifier_stack = SubResource("Resource_cckrs")
-Performance/use_chunks = true
-Performance/chunk_dimensions = Vector3(15, 15, 15)
-metadata/_custom_type_script = "uid://bev583t8rtj1a"
-
-[node name="ScatterItem" type="Node3D" parent="NavigationRegion3D/cenario/GridMap/pedras"]
-script = ExtResource("9_obfti")
-proportion = 300
-path = "uid://b4ted6l27vuyd"
-
-[node name="ScatterShape" type="Node3D" parent="NavigationRegion3D/cenario/GridMap/pedras"]
-transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
-script = ExtResource("10_i08f3")
-shape = SubResource("Resource_g8bsm")
-
 [node name="arvores2" type="Node3D" parent="NavigationRegion3D/cenario"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 3, 0)
 script = ExtResource("2_0jjcf")
 modifier_stack = SubResource("Resource_82nbf")
 Performance/use_chunks = true
