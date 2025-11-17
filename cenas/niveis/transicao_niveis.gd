@@ -113,7 +113,7 @@ func fazer_fade_in(duracao: float = 1.0) -> void:
 	print("[TRANSICAO] Tela clareada!")
 
 func carregar_nivel(nivel_path: String):
-	"""Carrega o novo nível"""
+	"""Carrega o novo nível substituindo o cenário atual"""
 	# Pequena pausa antes de carregar
 	await Engine.get_main_loop().create_timer(0.5).timeout
 	
@@ -123,19 +123,64 @@ func carregar_nivel(nivel_path: String):
 		await fazer_fade_in()
 		return
 	
-	print("[TRANSICAO] Mudando para: ", nivel_path)
+	print("[TRANSICAO] Carregando novo cenário: ", nivel_path)
 	
-	# Mudar cena
-	var erro = get_tree().change_scene_to_file(nivel_path)
+	# Buscar o nó cena_principal
+	var cena_principal = get_tree().root.get_node_or_null("cena_principal")
 	
-	if erro != OK:
-		push_error("[TRANSICAO] Erro ao carregar nível: ", erro)
+	if not cena_principal:
+		push_error("[TRANSICAO] cena_principal não encontrada! Usando método padrão...")
+		var erro = get_tree().change_scene_to_file(nivel_path)
+		if erro != OK:
+			push_error("[TRANSICAO] Erro ao carregar nível: ", erro)
+			esta_em_transicao = false
+			return
+		await Engine.get_main_loop().process_frame
+		await fazer_fade_in()
 		esta_em_transicao = false
 		return
 	
-	# Aguardar próximo frame após mudança
+	# Buscar o cenário atual dentro de cena_principal/mapa
+	var no_mapa = cena_principal.get_node_or_null("mapa")
+	
+	if not no_mapa:
+		push_error("[TRANSICAO] Nó 'mapa' não encontrado dentro de cena_principal!")
+		esta_em_transicao = false
+		await fazer_fade_in()
+		return
+	
+	# Buscar cenário atual (primeiro filho do mapa)
+	var cenario_atual = null
+	for child in no_mapa.get_children():
+		if child is Node3D:
+			cenario_atual = child
+			break
+	
+	if cenario_atual:
+		print("[TRANSICAO] Removendo cenário atual: ", cenario_atual.name)
+		cenario_atual.queue_free()
+	
+	# Carregar novo cenário
+	var novo_cenario_scene = load(nivel_path)
+	
+	if not novo_cenario_scene:
+		push_error("[TRANSICAO] Não foi possível carregar: ", nivel_path)
+		esta_em_transicao = false
+		await fazer_fade_in()
+		return
+	
+	var novo_cenario = novo_cenario_scene.instantiate()
+	print("[TRANSICAO] Adicionando novo cenário: ", novo_cenario.name)
+	
+	# Adicionar novo cenário ao mapa
+	no_mapa.add_child(novo_cenario)
+	
+	# Aguardar alguns frames para tudo se estabilizar
 	await Engine.get_main_loop().process_frame
 	await Engine.get_main_loop().process_frame
+	
+	# Reposicionar jogador se necessário
+	reposicionar_jogador(novo_cenario)
 	
 	# Fade in
 	await fazer_fade_in()
@@ -149,3 +194,27 @@ func fazer_transicao_direta():
 	
 	await fazer_fade_out(1.0)
 	await carregar_nivel(proximo_nivel)
+
+func reposicionar_jogador(novo_cenario: Node):
+	"""Reposiciona o jogador no spawn do novo cenário"""
+	var player = get_tree().get_first_node_in_group("player")
+	
+	if not player:
+		print("[TRANSICAO] [AVISO] Jogador não encontrado para reposicionar")
+		return
+	
+	# Buscar spawn point no novo cenário
+	var spawn_point = novo_cenario.get_node_or_null("spawn_point")
+	
+	if spawn_point:
+		player.global_position = spawn_point.global_position
+		print("[TRANSICAO] Jogador reposicionado no spawn_point")
+	else:
+		# Se não tiver spawn_point, colocar na origem do cenário
+		player.global_position = novo_cenario.global_position + Vector3(0, 1, 0)
+		print("[TRANSICAO] Jogador reposicionado na origem do cenário")
+	
+	# Reabilitar controles
+	if player.has_method("habilitar_controles"):
+		player.habilitar_controles()
+		print("[TRANSICAO] Controles do jogador habilitados")

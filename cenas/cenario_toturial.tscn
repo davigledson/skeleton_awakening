@@ -102,6 +102,7 @@ item/5/navigation_layers = 1
 [node name="cenario_toturial" type="Node3D"]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.014679849, 0)
 navigation_mesh = SubResource("NavigationMesh_coakk")
 
 [node name="cenario_3" parent="NavigationRegion3D" instance=ExtResource("1_wcl7g")]
