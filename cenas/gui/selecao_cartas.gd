@@ -19,6 +19,12 @@ var cartas_sorteadas = []
 var cartas_info = []
 var carta_hover_atual = null
 
+# ===== VARIÁVEIS PARA JOYSTICK =====
+var carta_selecionada_index: int = 0  # Carta atualmente focada
+var botoes_carta = []  # Array com os 3 botões
+var pode_navegar: bool = true  # Cooldown para evitar navegação rápida demais
+var cooldown_navegacao: float = 0.2  # Tempo entre navegações
+
 # ===== VARIÁVEL CONFIGURADA PELA CARTA DROP =====
 var eh_ultima_onda: bool = false
 
@@ -28,7 +34,96 @@ func _ready():
 	carregar_info_cartas()
 	configurar_botoes()
 	
+	# Inicializar array de botões
+	botoes_carta = [carta1, carta2, carta3]
+	
+	# Focar primeira carta
+	atualizar_foco_visual()
+	
 	print("[SELECAO_CARTAS] Tela inicializada. É última onda: ", eh_ultima_onda)
+	print("[SELECAO_CARTAS] Suporte a joystick ativado!")
+
+func _input(event):
+	if not pode_navegar:
+		return
+	
+	# Navegação com D-pad ou Analógico Esquerdo
+	if event.is_action_pressed("ui_right") or event.is_action_pressed("ui_down"):
+		navegar_direita()
+	elif event.is_action_pressed("ui_left") or event.is_action_pressed("ui_up"):
+		navegar_esquerda()
+	
+	# Seleção com botão X do Xbox (joypad button 2)
+	elif event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_X:
+		confirmar_selecao()
+	# Alternativa: botão A também funciona
+	elif event.is_action_pressed("ui_accept"):
+		confirmar_selecao()
+
+func navegar_direita():
+	if carta_selecionada_index < 2:
+		carta_selecionada_index += 1
+		atualizar_foco_visual()
+		tocar_som_navegacao()
+		iniciar_cooldown()
+
+func navegar_esquerda():
+	if carta_selecionada_index > 0:
+		carta_selecionada_index -= 1
+		atualizar_foco_visual()
+		tocar_som_navegacao()
+		iniciar_cooldown()
+
+func confirmar_selecao():
+	print("[SELECAO_CARTAS] Confirmando seleção via joystick: Carta ", carta_selecionada_index + 1)
+	_on_carta_selecionada(carta_selecionada_index)
+
+func atualizar_foco_visual():
+	# Resetar todos os botões
+	for i in range(botoes_carta.size()):
+		var botao = botoes_carta[i]
+		if i == carta_selecionada_index:
+			# Carta focada - destaque visual
+			animar_botao(botao, Vector2(1.15, 1.15))
+			adicionar_borda_destaque(botao, true)
+		else:
+			# Carta não focada
+			animar_botao(botao, Vector2.ONE)
+			adicionar_borda_destaque(botao, false)
+
+func adicionar_borda_destaque(botao: Button, destacar: bool):
+	var panel = botao.get_node_or_null("MarginContainer/VBoxContainer/CardPanel")
+	if not panel:
+		return
+	
+	var style = panel.get_theme_stylebox("panel")
+	if style is StyleBoxFlat:
+		if destacar:
+			# Borda brilhante quando focado
+			style.border_color = Color(1.0, 0.9, 0.3)  # Dourado brilhante
+			style.border_width_left = 5
+			style.border_width_right = 5
+			style.border_width_top = 5
+			style.border_width_bottom = 5
+			style.shadow_size = 8
+			style.shadow_color = Color(1.0, 0.9, 0.3, 0.5)
+		else:
+			# Borda normal
+			style.border_color = Color(0.8, 0.7, 0.3)
+			style.border_width_left = 3
+			style.border_width_right = 3
+			style.border_width_top = 3
+			style.border_width_bottom = 3
+			style.shadow_size = 0
+
+func tocar_som_navegacao():
+	if som_hover and not som_hover.playing:
+		som_hover.play()
+
+func iniciar_cooldown():
+	pode_navegar = false
+	await get_tree().create_timer(cooldown_navegacao).timeout
+	pode_navegar = true
 
 func configurar_botoes():
 	for i in range(3):
@@ -39,12 +134,20 @@ func configurar_botoes():
 
 func configurar_hover(botao: Button):
 	botao.mouse_entered.connect(func():
+		# Atualizar índice quando mouse passar por cima
+		var idx = botoes_carta.find(botao)
+		if idx != -1 and idx != carta_selecionada_index:
+			carta_selecionada_index = idx
+			atualizar_foco_visual()
+		
 		if carta_hover_atual != botao and som_hover:
 			carta_hover_atual = botao
 			som_hover.play()
-		animar_botao(botao, Vector2(1.1, 1.1))
 	)
-	botao.mouse_exited.connect(func(): animar_botao(botao, Vector2.ONE))
+	botao.mouse_exited.connect(func(): 
+		# Manter destaque visual mesmo quando mouse sair
+		atualizar_foco_visual()
+	)
 
 func animar_botao(botao: Button, escala: Vector2):
 	var tween = create_tween()

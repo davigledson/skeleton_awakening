@@ -1,4 +1,4 @@
-# card.gd (SCRIPT BASE - CORRIGIDO)
+# card.gd - Com suporte a Joystick
 extends Control
 class_name Card
 
@@ -8,20 +8,58 @@ var startPosition
 var cardHighlighted = false
 var is_dragging = false
 var carta_sendo_destruida = false
+var is_selected_by_joystick = false  # Seleção via controle
 
 @export var carta_nome: String = "Carta Base"
 @export_enum("Ataque", "Cura", "Velocidade", "Dano em Área") var carta_tipo: int = 0
 @export var carta_valor: int = 10
 @export var carta_descricao: String = "Descrição da carta"
-@export var requer_inimigos: bool = true  # Se a carta precisa de inimigos para funcionar
+@export var requer_inimigos: bool = true
 
 func _ready():
 	startPosition = position
 	print("🃏 Carta criada: ", carta_nome, " | Tipo: ", carta_tipo, " | Valor: ", carta_valor)
 	on_card_ready()
+	
+	# Conectar ao sistema de seleção por controle
+	add_to_group("cartas_selecionaveis")
 
 func on_card_ready():
 	pass
+
+func selecionar_com_joystick():
+	"""Chamado quando a carta é selecionada via controle"""
+	is_selected_by_joystick = true
+	if has_node("Anim"):
+		$Anim.play("Select")
+	
+	# Feedback visual extra para seleção por controle
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1.15, 1.15), 0.2)
+
+func desselecionar_com_joystick():
+	"""Chamado quando a carta é desselecionada via controle"""
+	is_selected_by_joystick = false
+	if has_node("Anim"):
+		$Anim.play("DeSelect")
+	
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(1, 1), 0.2)
+
+func usar_carta_com_joystick():
+	"""Ativa a carta quando o botão de usar (A/X) é pressionado"""
+	if carta_sendo_destruida:
+		return
+	
+	print("🎮 Carta usada com controle: ", carta_nome)
+	is_dragging = true
+	criar_card_holder()
+	Game.cardSelected = true
+	esconder_visual()
+	
+	# Aguardar um frame e soltar
+	await get_tree().process_frame
+	soltar_carta()
 
 func _on_mouse_entered():
 	if has_node("Anim"):
@@ -82,7 +120,6 @@ func soltar_carta():
 	if carta_sendo_destruida:
 		return
 	
-	# Verificar se a carta precisa de inimigos e se existem inimigos
 	if requer_inimigos and not tem_inimigos_disponiveis():
 		print("⚠️ Não há inimigos! Carta cancelada: ", carta_nome)
 		cancelar_carta()
@@ -101,18 +138,15 @@ func soltar_carta():
 	queue_free()
 
 func cancelar_carta():
-	"""Cancela o uso da carta e restaura ao estado inicial"""
 	is_dragging = false
 	Game.cardSelected = false
 	restaurar_visual()
 	
-	# Remover o CardHolder temporário
 	var holder = get_node_or_null("../../../CardHolder")
 	if holder:
 		for child in holder.get_children():
 			child.queue_free()
 	
-	# Feedback visual de cancelamento (opcional)
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.RED, 0.2)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
