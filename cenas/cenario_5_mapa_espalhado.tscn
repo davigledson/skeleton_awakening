@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dtg0e2wx0yh7x"]
+[gd_scene load_steps=36 format=3 uid="uid://dtg0e2wx0yh7x"]
 
 [ext_resource type="MeshLibrary" uid="uid://c4a3unvyha1gm" path="res://enviro_mesh_library.tres" id="1_enjg1"]
 [ext_resource type="Script" uid="uid://bev583t8rtj1a" path="res://addons/proton_scatter/src/scatter.gd" id="2_0jjcf"]
@@ -11,6 +11,18 @@
 [ext_resource type="Script" uid="uid://cajmntswiv6r" path="res://addons/proton_scatter/src/scatter_item.gd" id="9_obfti"]
 [ext_resource type="Script" uid="uid://dsfirevj8m40" path="res://addons/proton_scatter/src/scatter_shape.gd" id="10_i08f3"]
 [ext_resource type="Script" uid="uid://bvdsshou5w2bp" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="11_1g0ku"]
+[ext_resource type="Script" uid="uid://c1fnehdg6orv4" path="res://cenas/Inimigos/spawner_ondas.gd" id="12_jbftg"]
+[ext_resource type="PackedScene" uid="uid://b0v0psqtjub76" path="res://cenas/cartas/drop_carta/carta_drop.tscn" id="13_cckrs"]
+[ext_resource type="PackedScene" uid="uid://dsgvv52lpnb4q" path="res://cenas/Inimigos/cogumelo/slime_inimigo.tscn" id="14_isjtm"]
+[ext_resource type="PackedScene" uid="uid://bmm8onkc5npky" path="res://cenas/niveis/transicao_niveis.tscn" id="15_cckrs"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_enjg1"]
+vertices = PackedVector3Array(-51.161366, 1.6599998, -45, -51.161366, 1.6599998, 45, 53.838634, 1.6599998, 45, 53.838634, 1.6599998, -45, -46.161366, 1.5200005, -30, -46.161366, 1.5200005, 40, 48.838634, 1.5200005, 40, 48.838634, 1.5200005, -30)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(7, 6, 4), PackedInt32Array(4, 6, 5)]
+geometry_parsed_geometry_type = 1
+cell_size = 5.0
+cell_height = 0.01
+agent_height = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ljamw"]
 size = Vector3(1.105957, 1.1450195, 1)
@@ -114,9 +126,14 @@ stack = Array[ExtResource("4_jbftg")]([SubResource("Resource_1g0ku"), SubResourc
 script = ExtResource("11_1g0ku")
 radius = 25.842508
 
-[node name="cenario_5_mapa_espalhado" type="Node3D"]
+[node name="cenario_5" type="Node3D"]
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_enjg1")
+
+[node name="cenario" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="GridMap" type="GridMap" parent="NavigationRegion3D/cenario"]
 mesh_library = ExtResource("1_enjg1")
 cell_size = Vector3(1, 2, 1)
 data = {
@@ -124,14 +141,14 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="GridMap"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/cenario/GridMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0299547, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GridMap/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/cenario/GridMap/StaticBody3D"]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, -0.8635125, -0.9576349, 0)
 shape = SubResource("BoxShape3D_ljamw")
 
-[node name="pedras" type="Node3D" parent="GridMap"]
+[node name="pedras" type="Node3D" parent="NavigationRegion3D/cenario/GridMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06702328)
 script = ExtResource("2_0jjcf")
 modifier_stack = SubResource("Resource_cckrs")
@@ -139,17 +156,17 @@ Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 metadata/_custom_type_script = "uid://bev583t8rtj1a"
 
-[node name="ScatterItem" type="Node3D" parent="GridMap/pedras"]
+[node name="ScatterItem" type="Node3D" parent="NavigationRegion3D/cenario/GridMap/pedras"]
 script = ExtResource("9_obfti")
 proportion = 300
 path = "uid://b4ted6l27vuyd"
 
-[node name="ScatterShape" type="Node3D" parent="GridMap/pedras"]
+[node name="ScatterShape" type="Node3D" parent="NavigationRegion3D/cenario/GridMap/pedras"]
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
 script = ExtResource("10_i08f3")
 shape = SubResource("Resource_g8bsm")
 
-[node name="arvores" type="Node3D" parent="."]
+[node name="arvores" type="Node3D" parent="NavigationRegion3D/cenario"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6373153, -0.70962286, 0.6873522)
 script = ExtResource("2_0jjcf")
 modifier_stack = SubResource("Resource_i08f3")
@@ -157,17 +174,17 @@ Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 metadata/_custom_type_script = "uid://bev583t8rtj1a"
 
-[node name="ScatterItem" type="Node3D" parent="arvores"]
+[node name="ScatterItem" type="Node3D" parent="NavigationRegion3D/cenario/arvores"]
 script = ExtResource("9_obfti")
 proportion = 300
 path = "uid://dxx8r7gfyvdag"
 
-[node name="ScatterShape" type="Node3D" parent="arvores"]
+[node name="ScatterShape" type="Node3D" parent="NavigationRegion3D/cenario/arvores"]
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
 script = ExtResource("10_i08f3")
 shape = SubResource("Resource_i4jhp")
 
-[node name="arvores2" type="Node3D" parent="."]
+[node name="arvores2" type="Node3D" parent="NavigationRegion3D/cenario"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.637, 0.123999596, -0.06085354)
 script = ExtResource("2_0jjcf")
 modifier_stack = SubResource("Resource_82nbf")
@@ -175,13 +192,23 @@ Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 metadata/_custom_type_script = "uid://bev583t8rtj1a"
 
-[node name="ScatterItem" type="Node3D" parent="arvores2"]
+[node name="ScatterItem" type="Node3D" parent="NavigationRegion3D/cenario/arvores2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1711574, 0.23070765, 2.7329326)
 script = ExtResource("9_obfti")
 proportion = 300
 path = "uid://caqxfqurbp3ku"
 
-[node name="ScatterShape" type="Node3D" parent="arvores2"]
+[node name="ScatterShape" type="Node3D" parent="NavigationRegion3D/cenario/arvores2"]
 transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
 script = ExtResource("10_i08f3")
 shape = SubResource("Resource_6qs3k")
+
+[node name="spawner_ondas" type="Node3D" parent="."]
+transform = Transform3D(1, 2.9802322e-08, -2.9802322e-08, 0, 1, 0, 0, 0, 0.99999976, 0, 0, 0)
+script = ExtResource("12_jbftg")
+cena_carta_drop = ExtResource("13_cckrs")
+onda1_inimigo_A = ExtResource("14_isjtm")
+onda1_quantidade_A = 1
+
+[node name="transicao_nivel" parent="." instance=ExtResource("15_cckrs")]
+proximo_nivel = "uid://dtg0e2wx0yh7x"

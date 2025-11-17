@@ -8,13 +8,17 @@ extends Node3D
 var tempo_flutuacao: float = 0.0
 var posicao_inicial: Vector3
 var esta_coletada: bool = false
-
 var velocidade_flutuacao: float = 2.0
 var altura_flutuacao: float = 0.3
 var velocidade_rotacao: float = 2.0
 
+# ===== VARIÁVEL CONFIGURADA PELO SPAWNER =====
+var eh_ultima_onda: bool = false
+
 func _ready():
 	add_to_group("cartas")
+	
+	print("[CARTA_DROP] Carta criada. É última onda: ", eh_ultima_onda)
 	
 	if global_position.y < 0.5:
 		global_position.y = 1.0
@@ -55,6 +59,9 @@ func _on_body_entered(body: Node3D):
 func coletar_carta(player: Node3D):
 	esta_coletada = true
 	
+	print("[CARTA_DROP] ========== CARTA COLETADA ==========")
+	print("[CARTA_DROP] É última onda: ", eh_ultima_onda)
+	
 	if som_pegar:
 		som_pegar.play()
 	
@@ -67,15 +74,14 @@ func coletar_carta(player: Node3D):
 		tween_animacao.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	
 	get_tree().paused = true
-	abrir_selecao_cartas()
+	abrir_selecao_cartas(player)
 	
 	if tween_animacao:
 		await tween_animacao.finished
 	
 	queue_free()
 
-func abrir_selecao_cartas():
-	# CORRIGIDO: Caminho correto da cena de seleção
+func abrir_selecao_cartas(player: Node3D):
 	var selecao_scene = load("res://cenas/gui/selecao_cartas.tscn")
 	
 	if not selecao_scene:
@@ -84,9 +90,21 @@ func abrir_selecao_cartas():
 		return
 	
 	var selecao = selecao_scene.instantiate()
+	selecao.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# ===== IMPORTANTE: PASSAR SE É ÚLTIMA ONDA =====
+	if "eh_ultima_onda" in selecao:
+		selecao.eh_ultima_onda = eh_ultima_onda
+		print("[CARTA_DROP] ✅ Configurado eh_ultima_onda na interface: ", eh_ultima_onda)
+	else:
+		print("[CARTA_DROP] ❌ ERRO: Interface não tem propriedade 'eh_ultima_onda'!")
+	
 	get_tree().root.add_child(selecao)
+	print("[CARTA_DROP] Interface de seleção aberta!")
 
-static func spawnar_carta_na_frente_do_player(cena_carta: PackedScene, player: Node3D) -> Node3D:
+# ===== FUNÇÃO ESTÁTICA (NÃO USADA MAIS) =====
+static func spawnar_carta_na_frente_do_player(cena_carta: PackedScene, player: Node3D, nivel_destino: String = "") -> Node3D:
+	"""Esta função não é mais usada. O spawner cria a carta diretamente."""
 	if not cena_carta or not player:
 		return null
 	

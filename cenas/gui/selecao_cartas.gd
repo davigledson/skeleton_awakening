@@ -19,11 +19,16 @@ var cartas_sorteadas = []
 var cartas_info = []
 var carta_hover_atual = null
 
+# ===== VARIÁVEL CONFIGURADA PELA CARTA DROP =====
+var eh_ultima_onda: bool = false
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	sortear_cartas()
 	carregar_info_cartas()
 	configurar_botoes()
+	
+	print("[SELECAO_CARTAS] Tela inicializada. É última onda: ", eh_ultima_onda)
 
 func configurar_botoes():
 	for i in range(3):
@@ -185,19 +190,48 @@ func criar_label(nome: String, tamanho: int, cor: Color, outline: int, altura: i
 	return label
 
 func _on_carta_selecionada(indice: int):
+	print("[SELECAO_CARTAS] Carta ", indice + 1, " selecionada")
+	
+	# Tocar som
 	if som_select:
 		som_select.play()
+		await som_select.finished
 	
+	# Adicionar carta ao deck
 	if indice < cartas_sorteadas.size():
 		adicionar_carta_ao_deck(cartas_sorteadas[indice], cartas_info[indice])
 	
-	if som_select:
-		await som_select.finished
-	
+	# Despausar o jogo
 	get_tree().paused = false
-	queue_free()
+	
+	# Aguardar um pouco
+	await get_tree().create_timer(0.5).timeout
+	
+	# ===== VERIFICAR SE É ÚLTIMA ONDA =====
+	if eh_ultima_onda:
+		print("[SELECAO_CARTAS] ========== É A ÚLTIMA ONDA! ==========")
+		print("[SELECAO_CARTAS] Iniciando transição de nível...")
+		
+		# Buscar sistema de transição
+		var transicao = get_tree().get_first_node_in_group("transicao_nivel")
+		
+		if transicao and transicao.has_method("iniciar_transicao_ultima_onda"):
+			print("[SELECAO_CARTAS] Sistema de transição encontrado!")
+			# Remover interface ANTES da transição
+			queue_free()
+			# Iniciar transição
+			transicao.iniciar_transicao_ultima_onda()
+		else:
+			print("[SELECAO_CARTAS] [ERRO] Sistema de transição NÃO encontrado!")
+			print("[SELECAO_CARTAS] Certifique-se que existe um nó 'transicao_nivel' no grupo 'transicao_nivel'")
+			queue_free()
+	else:
+		print("[SELECAO_CARTAS] Não é a última onda, apenas fechando interface")
+		queue_free()
 
 func adicionar_carta_ao_deck(carta_path: String, info: Dictionary):
+	print("[SELECAO_CARTAS] Adicionando carta ao deck: ", info.nome)
+	
 	Game.cartas_no_deck.append({
 		"path": carta_path,
 		"nome": info.nome,
@@ -207,6 +241,7 @@ func adicionar_carta_ao_deck(carta_path: String, info: Dictionary):
 	
 	var card_container = buscar_node(get_tree().root, "CardContainer")
 	if not card_container:
+		print("[SELECAO_CARTAS] [AVISO] CardContainer não encontrado")
 		return
 	
 	var carta = load(carta_path).instantiate()

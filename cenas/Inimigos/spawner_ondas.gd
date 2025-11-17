@@ -1,4 +1,4 @@
-# spawner_ondas.gd - Sistema de Ondas Simplificado
+# spawner_ondas.gd - Sistema de Ondas
 extends Node3D
 
 # ===== ESTRUTURA DE ONDA =====
@@ -76,7 +76,7 @@ var personagem: Node3D = null
 var total_inimigos_onda_atual: int = 0
 
 func _ready():
-	print("Sistema de Ondas inicializado")
+	print("[SPAWNER] Sistema inicializado - Cenário: ", get_parent().name)
 	add_to_group("spawner_ondas")
 	
 	await get_tree().process_frame
@@ -88,18 +88,16 @@ func _ready():
 		iniciar_ondas()
 
 func buscar_personagem():
-	"""Busca o personagem principal"""
 	var players = get_tree().get_nodes_in_group("player")
 	
 	if players.size() > 0:
 		personagem = players[0]
-		print("  Personagem encontrado: ", personagem.name)
+		print("[SPAWNER] Personagem encontrado: ", personagem.name)
 	else:
-		print("  [AVISO] Personagem nao encontrado! Usando posicao do spawner")
+		print("[SPAWNER] [AVISO] Personagem não encontrado!")
 		personagem = null
 
 func construir_ondas():
-	"""Constroi as ondas baseado nas configuracoes"""
 	ondas.clear()
 	
 	adicionar_onda(
@@ -132,10 +130,9 @@ func construir_ondas():
 		onda5_intervalo, "Onda 5"
 	)
 	
-	print("  ", ondas.size(), " ondas configuradas")
+	print("[SPAWNER] ", ondas.size(), " ondas configuradas")
 
 func adicionar_onda(cenas: Array, quantidades: Array, intervalo: float, nome: String):
-	"""Adiciona uma onda se tiver pelo menos um inimigo"""
 	var onda = Onda.new()
 	var total_inimigos = 0
 	var tipos_texto = []
@@ -153,12 +150,11 @@ func adicionar_onda(cenas: Array, quantidades: Array, intervalo: float, nome: St
 		onda.intervalo = intervalo
 		onda.descricao = nome + ": " + " + ".join(tipos_texto) + " = " + str(total_inimigos) + " total"
 		ondas.append(onda)
-		print("  [", nome, "] ", total_inimigos, " inimigos configurados")
+		print("[SPAWNER] [", nome, "] ", total_inimigos, " inimigos")
 
 func iniciar_ondas():
-	"""Inicia o sistema de ondas"""
 	if ondas.size() == 0:
-		print("  [AVISO] Nenhuma onda configurada!")
+		print("[SPAWNER] [AVISO] Nenhuma onda configurada!")
 		return
 	
 	onda_atual = 0
@@ -166,9 +162,8 @@ func iniciar_ondas():
 	iniciar_onda_atual()
 
 func iniciar_onda_atual():
-	"""Inicia a onda atual"""
 	if onda_atual >= ondas.size():
-		print("TODAS AS ONDAS COMPLETAS!")
+		print("[SPAWNER] TODAS AS ONDAS COMPLETAS!")
 		estado = "completo"
 		return
 	
@@ -184,9 +179,7 @@ func iniciar_onda_atual():
 	inimigos_para_spawnar.shuffle()
 	total_inimigos_onda_atual = inimigos_para_spawnar.size()
 	
-	print(onda.descricao, " INICIANDO!")
-	print("  Total: ", total_inimigos_onda_atual, " inimigos")
-	print("  Intervalo: ", onda.intervalo, "s")
+	print("[SPAWNER] ", onda.descricao, " INICIANDO!")
 
 func _process(delta: float) -> void:
 	if estado == "spawnando":
@@ -197,7 +190,6 @@ func _process(delta: float) -> void:
 		processar_descanso(delta)
 
 func processar_spawn(delta: float):
-	"""Processa spawn da onda atual"""
 	if inimigos_para_spawnar.size() == 0:
 		return
 	
@@ -209,37 +201,34 @@ func processar_spawn(delta: float):
 		spawnar_inimigo(cena)
 		timer = onda.intervalo
 		
-		# Terminou de spawnar todos?
 		if inimigos_para_spawnar.size() == 0:
-			print("Todos os inimigos spawnados! Aguardando morte...")
+			print("[SPAWNER] Todos spawnados! Aguardando morte...")
 			estado = "aguardando_morte"
 
 func verificar_inimigos_vivos():
-	"""Verifica se ainda tem inimigos vivos"""
 	var inimigos_vivos = get_tree().get_nodes_in_group("inimigos")
 	
 	if inimigos_vivos.size() == 0:
 		finalizar_onda()
 
 func finalizar_onda():
-	"""Finaliza a onda e dropa carta"""
-	print("Onda ", onda_atual + 1, " completa!")
-	
-	# Dropar carta de recompensa
-	dropar_carta()
+	print("[SPAWNER] Onda ", onda_atual + 1, " completa!")
 	
 	onda_atual += 1
+	var eh_ultima_onda = (onda_atual >= ondas.size())
 	
-	if onda_atual < ondas.size():
+	# Dropar carta
+	dropar_carta(eh_ultima_onda)
+	
+	if eh_ultima_onda:
+		estado = "completo"
+		print("[SPAWNER] ===== TODAS AS ONDAS COMPLETAS! =====")
+	else:
 		estado = "descansando"
 		timer = tempo_entre_ondas
-		print("  Descanso de ", tempo_entre_ondas, "s...")
-	else:
-		estado = "completo"
-		print("TODAS AS ONDAS COMPLETAS!")
+		print("[SPAWNER] Descanso de ", tempo_entre_ondas, "s...")
 
 func processar_descanso(delta: float):
-	"""Processa tempo de descanso entre ondas"""
 	timer -= delta
 	
 	if timer <= 0.0:
@@ -247,7 +236,6 @@ func processar_descanso(delta: float):
 		iniciar_onda_atual()
 
 func spawnar_inimigo(cena: PackedScene):
-	"""Spawna um inimigo ao redor do personagem"""
 	var inimigo = cena.instantiate()
 	
 	var pos: Vector3
@@ -272,31 +260,39 @@ func spawnar_inimigo(cena: PackedScene):
 	inimigo.position = pos
 	get_tree().current_scene.call_deferred("add_child", inimigo)
 
-func dropar_carta():
-	"""Dropa carta na frente do personagem usando funcao estatica"""
-	if not cena_carta_drop:
-		print("  [AVISO] Nenhuma carta configurada!")
+func dropar_carta(eh_ultima_onda: bool):
+	"""Dropa carta e marca se é a última onda"""
+	if not cena_carta_drop or not personagem:
+		print("[SPAWNER] [AVISO] Não foi possível dropar carta")
 		return
 	
-	if not personagem:
-		print("  [AVISO] Personagem nao encontrado!")
-		return
+	print("[SPAWNER] Dropando carta", " (ÚLTIMA ONDA)" if eh_ultima_onda else " (normal)")
 	
-	# Usar funcao estatica do carta_drop.gd
-	var CartaDrop = preload("res://cenas/cartas/drop_carta/carta_drop.gd")
-	CartaDrop.spawnar_carta_na_frente_do_player(cena_carta_drop, personagem)
+	# Spawnar carta na frente do jogador
+	var carta = cena_carta_drop.instantiate()
 	
-	print("Carta dropada na frente do jogador!")
+	var direcao_frente = -personagem.transform.basis.z
+	direcao_frente.y = 0
+	direcao_frente = direcao_frente.normalized()
+	
+	var pos = personagem.global_position + (direcao_frente * 3.0)
+	pos.y = max(personagem.global_position.y + 1.0, 1.0)
+	
+	get_tree().current_scene.add_child(carta)
+	carta.global_position = pos
+	
+	# IMPORTANTE: Marcar se é a última onda
+	if "eh_ultima_onda" in carta:
+		carta.eh_ultima_onda = eh_ultima_onda
+		print("[SPAWNER] Carta marcada como ", "ÚLTIMA ONDA" if eh_ultima_onda else "onda normal")
 
 # ===== FUNCOES PUBLICAS =====
 
 func pausar():
 	set_process(false)
-	print("Ondas pausadas")
 
 func retomar():
 	set_process(true)
-	print("Ondas retomadas")
 
 func pular_onda():
 	inimigos_para_spawnar.clear()
@@ -310,7 +306,6 @@ func resetar():
 	estado = "aguardando"
 	inimigos_para_spawnar.clear()
 	construir_ondas()
-	print("Sistema resetado")
 
 func obter_onda_atual() -> int:
 	return onda_atual + 1
@@ -328,5 +323,4 @@ func obter_inimigos_vivos() -> int:
 	return get_tree().get_nodes_in_group("inimigos").size()
 
 func obter_total_inimigos_onda() -> int:
-	"""Retorna o total de inimigos da onda atual"""
 	return total_inimigos_onda_atual
