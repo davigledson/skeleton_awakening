@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://085m0pgrbo2t"]
+[gd_scene load_steps=11 format=3 uid="uid://085m0pgrbo2t"]
 
 [ext_resource type="Script" uid="uid://dihmhps8cwpkg" path="res://cenas/cartas/CardContainer.gd" id="1_xeshw"]
+[ext_resource type="Script" uid="uid://dgcs1jjc6msk5" path="res://cenas/cartas/deck_de_cartas.gd" id="1_y5q5f"]
 [ext_resource type="PackedScene" uid="uid://b6suxxafyeg30" path="res://cenas/cartas/passivas/carta_atk_basico.tscn" id="3_wy276"]
 [ext_resource type="Script" uid="uid://cyf5wvgaw34od" path="res://cenas/cartas/CardPlacement.gd" id="3_yxjxn"]
 [ext_resource type="Script" uid="uid://de4bmunpvd2bs" path="res://cenas/cartas/carta_atk_basico.gd" id="4_pei1p"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dk05dmpsqfdn8" path="res://cenas/cartas/carta_magia_negra/carta_magia_negra.tscn" id="11_x7w0l"]
 
 [node name="Board" type="Node"]
+script = ExtResource("1_y5q5f")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

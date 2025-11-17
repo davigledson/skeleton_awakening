@@ -27,10 +27,10 @@ color = Color(0, 0, 0, 0.49411765)
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 463.0
-offset_top = 46.0
-offset_right = 761.0
-offset_bottom = 85.0
+offset_left = 427.0
+offset_top = 85.0
+offset_right = 725.0
+offset_bottom = 124.0
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_siylq")
 theme_override_font_sizes/font_size = 32
@@ -40,9 +40,10 @@ horizontal_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 custom_minimum_size = Vector2(900, 400)
 layout_mode = 0
-offset_left = 5.0
+offset_left = 8.0
+offset_top = 132.0
 offset_right = 1158.0
-offset_bottom = 400.0
+offset_bottom = 620.0
 theme_override_constants/separation = 30
 alignment = 1
 

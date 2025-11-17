@@ -13,6 +13,7 @@ var carta_sendo_destruida = false
 @export_enum("Ataque", "Cura", "Velocidade", "Dano em Área") var carta_tipo: int = 0
 @export var carta_valor: int = 10
 @export var carta_descricao: String = "Descrição da carta"
+@export var requer_inimigos: bool = true  # Se a carta precisa de inimigos para funcionar
 
 func _ready():
 	startPosition = position
@@ -35,7 +36,7 @@ func _on_mouse_exited():
 func _on_gui_input(event):
 	if carta_sendo_destruida:
 		return
-		
+	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			if cardHighlighted:
@@ -45,7 +46,6 @@ func _on_gui_input(event):
 				Game.cardSelected = true
 				esconder_visual()
 		else:
-			# Botão solto - SEMPRE ativar efeito se estava arrastando
 			if is_dragging:
 				soltar_carta()
 
@@ -74,27 +74,49 @@ func restaurar_visual():
 		if sprite is Sprite2D or sprite is TextureRect:
 			sprite.show()
 
+func tem_inimigos_disponiveis() -> bool:
+	var inimigos = get_tree().get_nodes_in_group("inimigos")
+	return not inimigos.is_empty()
+
 func soltar_carta():
-	"""Ativa o efeito e depois destrói a carta"""
 	if carta_sendo_destruida:
 		return
-		
+	
+	# Verificar se a carta precisa de inimigos e se existem inimigos
+	if requer_inimigos and not tem_inimigos_disponiveis():
+		print("⚠️ Não há inimigos! Carta cancelada: ", carta_nome)
+		cancelar_carta()
+		return
+	
 	carta_sendo_destruida = true
 	is_dragging = false
 	Game.cardSelected = false
 	
-	print("Carta jogada: ", carta_nome)
+	print("✅ Carta jogada: ", carta_nome)
 	
-	# Ativar efeito (AGUARDAR se for assíncrono)
 	await ativar_efeito()
-	
-	# Esperar um pouco antes de destruir (dar tempo para efeitos iniciarem)
 	await get_tree().create_timer(0.5).timeout
 	
-	print("Destruindo carta: ", carta_nome)
+	print("🗑️ Destruindo carta: ", carta_nome)
 	queue_free()
 
-# MÉTODO PRINCIPAL - Classes filhas DEVEM sobrescrever
+func cancelar_carta():
+	"""Cancela o uso da carta e restaura ao estado inicial"""
+	is_dragging = false
+	Game.cardSelected = false
+	restaurar_visual()
+	
+	# Remover o CardHolder temporário
+	var holder = get_node_or_null("../../../CardHolder")
+	if holder:
+		for child in holder.get_children():
+			child.queue_free()
+	
+	# Feedback visual de cancelamento (opcional)
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.RED, 0.2)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
+
 func ativar_efeito():
 	print("⚠️ AVISO: ativar_efeito() não foi implementado em ", carta_nome)
 	push_warning("Carta " + carta_nome + " não tem efeito implementado!")

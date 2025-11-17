@@ -4,9 +4,11 @@ extends Node
 var cardSelected = false
 var mouseOnPlacement = false
 var personagem_principal = null
+var cartas_no_deck: Array = []  # ← Adicione o tipo Array aqui
 
 func _ready():
 	print("Sistema de cartas inicializado")
+	print("[GAME] Array de cartas inicializado: ", cartas_no_deck)  # ← Adicione este print
 	await get_tree().process_frame
 	buscar_personagem()
 
@@ -21,7 +23,6 @@ func buscar_personagem():
 		buscar_personagem()
 
 func ativar_efeito_carta(tipo: int, valor: int):
-	"""Apenas envia o efeito para o personagem - efeitos visuais são spawnados pelas cartas"""
 	print("Game.gd recebeu carta - Tipo: ", tipo, " Valor: ", valor)
 	
 	if not personagem_principal:
