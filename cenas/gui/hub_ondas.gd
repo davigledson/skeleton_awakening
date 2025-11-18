@@ -7,6 +7,7 @@ extends CanvasLayer
 
 var spawner: Node3D = null
 var total_inimigos_onda: int = 0
+var spawner_anterior: Node3D = null  # Para detectar mudança de spawner
 
 func _ready():
 	# Buscar o spawner de ondas
@@ -30,11 +31,28 @@ func buscar_spawner():
 	if spawners.size() > 0:
 		spawner = spawners[0]
 		print("HUD conectado ao spawner: ", spawner.name)
+		
+		# Se mudou de spawner, resetar valores
+		if spawner != spawner_anterior:
+			resetar_hud()
+			spawner_anterior = spawner
 	else:
 		print("[AVISO] Spawner não encontrado! Adicione ao grupo 'spawner_ondas'")
 
+func resetar_hud():
+	"""Reseta os valores da HUD quando muda de nível"""
+	total_inimigos_onda = 0
+	print("[HUD] HUD resetada para novo nível")
+
 func _process(_delta):
+	# Verificar se spawner ainda existe (pode ter sido destruído na troca de nível)
+	if spawner and not is_instance_valid(spawner):
+		spawner = null
+		spawner_anterior = null
+	
+	# Rebuscar spawner se perdeu
 	if not spawner:
+		buscar_spawner()
 		return
 	
 	atualizar_interface()
@@ -83,7 +101,7 @@ func atualizar_interface():
 	
 	# Verificar se completou todas as ondas
 	if spawner.has_method("esta_completo") and spawner.esta_completo():
-		label_onda.text = "✅ VITÓRIA!"
+		label_onda.text = "✅VITÓRIA!"
 		label_inimigos.text = "Todas as ondas completas!"
 		if label_inimigos_vivos:
 			label_inimigos_vivos.text = ""

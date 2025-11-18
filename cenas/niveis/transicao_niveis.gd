@@ -175,12 +175,19 @@ func carregar_nivel(nivel_path: String):
 	# Adicionar novo cenário ao mapa
 	no_mapa.add_child(novo_cenario)
 	
-	# Aguardar alguns frames para tudo se estabilizar
-	await Engine.get_main_loop().process_frame
-	await Engine.get_main_loop().process_frame
+	# ===== CORREÇÃO DO BUG: AGUARDAR FÍSICA CARREGAR =====
+	# Aguardar vários frames de física para garantir colisões
+	for i in range(5):
+		await get_tree().physics_frame
 	
-	# Reposicionar jogador se necessário
+	print("[TRANSICAO] Física do cenário carregada")
+	
+	# Reposicionar jogador DEPOIS da física estar pronta
 	reposicionar_jogador(novo_cenario)
+	
+	# Mais alguns frames para estabilizar
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	
 	# Fade in
 	await fazer_fade_in()

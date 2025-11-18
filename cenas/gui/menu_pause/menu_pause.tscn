@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqitr8pmax3xp"]
+
+[ext_resource type="Script" uid="uid://cq3hewd8jlhrk" path="res://cenas/gui/menu_pause/menu_pause.gd" id="1_je7ex"]
+[ext_resource type="FontFile" uid="uid://d17c01tt07uie" path="res://fontes/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_6bm3k"]
+[ext_resource type="AudioStream" uid="uid://b1rccjryrh4rs" path="res://cenas/gui/menu_inicial/menu_selecionar.mp3" id="3_cu7i5"]
+
+[node name="menu_pause" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_je7ex")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+texture_filter = 4
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 659.0
+color = Color(0, 0, 0, 0.31764707)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 0
+offset_left = -7.0
+offset_top = 5.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/separation = 20
+
+[node name="Titulo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_6bm3k")
+theme_override_font_sizes/font_size = 48
+text = "PAUSADO"
+horizontal_alignment = 1
+
+[node name="BtnContinuar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_6bm3k")
+theme_override_font_sizes/font_size = 24
+text = "CONTINUAR"
+
+[node name="BtnControles" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6bm3k")
+theme_override_font_sizes/font_size = 24
+text = "CONTROLES"
+
+[node name="BtnSair" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6bm3k")
+theme_override_font_sizes/font_size = 24
+text = "SAIR"
+
+[node name="PainelControles" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TituloControles" type="Label" parent="PainelControles"]
+layout_mode = 0
+offset_left = 491.0
+offset_top = 42.0
+offset_right = 678.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("2_6bm3k")
+theme_override_font_sizes/font_size = 32
+text = "CONTROLES"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PainelControles"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 0
+offset_left = 278.0
+offset_top = 88.0
+offset_right = 878.0
+offset_bottom = 488.0
+theme_override_fonts/normal_font = ExtResource("2_6bm3k")
+bbcode_enabled = true
+text = "[b]TECLADO E MOUSE:[/b]
+WASD - Movimentar
+Mouse - Rotacionar câmera
+Espaço - Pular
+Scroll - Zoom
+Click Esquerdo - Selecionar/Usar carta
+
+[b]CONTROLE/JOYSTICK:[/b]
+Analógico Esquerdo - Movimentar
+Analógico Direito - Rotacionar câmera
+A - Pular
+L1/R2 - Seleção de cartas
+B - Usar cartas
+L2/R2 - Zoom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnVoltar" type="Button" parent="PainelControles"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 477.0
+offset_top = 491.0
+offset_right = 677.0
+offset_bottom = 541.0
+text = "VOLTAR"
+
+[node name="SomNavegar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cu7i5")

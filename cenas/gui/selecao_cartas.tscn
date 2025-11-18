@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://gwsl1sajja3g" path="res://cenas/gui/selecao_cartas.gd" id="1_y3w3y"]
 [ext_resource type="FontFile" uid="uid://d17c01tt07uie" path="res://fontes/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_siylq"]
-[ext_resource type="AudioStream" uid="uid://b1rccjryrh4rs" path="res://cenas/gui/menu_selecionar.mp3" id="3_siylq"]
+[ext_resource type="AudioStream" uid="uid://b1rccjryrh4rs" path="res://cenas/gui/menu_inicial/menu_selecionar.mp3" id="3_siylq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y73hx"]
 bg_color = Color(0.05490196, 0.5294118, 0.78431374, 1)

@@ -4,11 +4,12 @@ extends Node
 var cardSelected = false
 var mouseOnPlacement = false
 var personagem_principal = null
-var cartas_no_deck: Array = []  # ← Adicione o tipo Array aqui
+var cartas_no_deck: Array = []
+var gameplay_ativo: bool = false  # ← NOVA VARIÁVEL
 
 func _ready():
 	print("Sistema de cartas inicializado")
-	print("[GAME] Array de cartas inicializado: ", cartas_no_deck)  # ← Adicione este print
+	print("[GAME] Array de cartas inicializado: ", cartas_no_deck)
 	await get_tree().process_frame
 	buscar_personagem()
 
@@ -35,3 +36,16 @@ func ativar_efeito_carta(tipo: int, valor: int):
 		print("Efeito enviado ao personagem!")
 	else:
 		print("[ERRO] Personagem nao tem o metodo ativar_carta()!")
+
+# Funções para controlar o estado do gameplay
+func iniciar_gameplay():
+	"""Chame isso quando a cena de gameplay carregar"""
+	gameplay_ativo = true
+	get_tree().paused = false  # Despausar o jogo
+	print("[GAME] Gameplay ativado")
+
+func finalizar_gameplay():
+	"""Chame isso quando sair do gameplay"""
+	gameplay_ativo = false
+	get_tree().paused = true  # Pausar tudo
+	print("[GAME] Gameplay desativado")

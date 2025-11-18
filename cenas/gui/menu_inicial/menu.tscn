@@ -1,0 +1,130 @@
+[gd_scene load_steps=6 format=3 uid="uid://pmnqyyn8nlau"]
+
+[ext_resource type="Script" uid="uid://cvld8ha7uviui" path="res://cenas/gui/menu_inicial/menu.gd" id="1_evxts"]
+[ext_resource type="Texture2D" uid="uid://cpoqbigsyr0sh" path="res://cenas/gui/menu_inicial/menu_wallpaper.png" id="2_2f1q5"]
+[ext_resource type="FontFile" uid="uid://d17c01tt07uie" path="res://fontes/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_y3xf8"]
+[ext_resource type="AudioStream" uid="uid://b1rccjryrh4rs" path="res://cenas/gui/menu_inicial/menu_selecionar.mp3" id="3_y3xf8"]
+[ext_resource type="AudioStream" uid="uid://civch6rvnftbr" path="res://cenas/gui/menu_inicial/som_menu.mp3" id="4_t8nmf"]
+
+[node name="menu_inicial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_evxts")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+texture_filter = 4
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 659.0
+texture = ExtResource("2_2f1q5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 0
+offset_right = 1159.0
+offset_bottom = 643.0
+theme_override_constants/separation = 20
+
+[node name="Titulo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_y3xf8")
+theme_override_font_sizes/font_size = 48
+text = "Skeleton Awakening
+"
+horizontal_alignment = 1
+
+[node name="BtnIniciar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_y3xf8")
+theme_override_font_sizes/font_size = 24
+text = "INICIAR"
+
+[node name="BtnControles" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y3xf8")
+theme_override_font_sizes/font_size = 24
+text = "CONTROLES"
+
+[node name="BtnOpcoes" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y3xf8")
+theme_override_font_sizes/font_size = 24
+text = "OPÇÕES"
+
+[node name="BtnSair" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_y3xf8")
+theme_override_font_sizes/font_size = 24
+text = "SAIR"
+
+[node name="PainelControles" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TituloControles" type="Label" parent="PainelControles"]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 62.0
+offset_right = 652.0
+offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("2_y3xf8")
+theme_override_font_sizes/font_size = 32
+text = "CONTROLES"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PainelControles"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 0
+offset_left = 257.0
+offset_top = 147.0
+offset_right = 857.0
+offset_bottom = 547.0
+theme_override_fonts/normal_font = ExtResource("2_y3xf8")
+bbcode_enabled = true
+text = "[b]TECLADO E MOUSE:[/b]
+WASD - Movimentar
+Mouse - Rotacionar câmera
+Espaço - Pular
+Scroll - Zoom
+Click Esquerdo - Selecionar/Usar carta
+
+[b]CONTROLE/JOYSTICK:[/b]
+Analógico Esquerdo - Movimentar
+Analógico Direito - Rotacionar câmera
+A - Pular
+L1/R2 - Seleção de cartas
+B - Usar cartas
+L2/R2 - Zoom"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnVoltar" type="Button" parent="PainelControles"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 458.0
+offset_top = 571.0
+offset_right = 658.0
+offset_bottom = 621.0
+text = "VOLTAR"
+
+[node name="SomNavegar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_y3xf8")
+
+[node name="MusicaMenu" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_t8nmf")
+autoplay = true

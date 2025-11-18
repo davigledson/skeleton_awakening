@@ -1244,6 +1244,9 @@ script = ExtResource("8_qwd57")
 cena_carta_drop = ExtResource("9_jolkj")
 onda1_inimigo_A = ExtResource("10_2jvp7")
 onda1_quantidade_A = 2
+onda1_inimigo_B = ExtResource("10_2jvp7")
+onda2_inimigo_A = ExtResource("10_2jvp7")
+onda2_quantidade_A = 2
 
 [node name="transicao_nivel" parent="." instance=ExtResource("11_jolkj")]
 proximo_nivel = "uid://dtg0e2wx0yh7x"
