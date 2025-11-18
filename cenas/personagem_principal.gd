@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var camera = $CameraPivot/Camera3D
 @onready var posicao_magia = $posicao_magia
 @onready var som_dano = $sons/som_dano
+@onready var som_morte = $sons/som_morte
 
 var health = 100
 var max_health = 100
@@ -14,14 +15,15 @@ var bonus_dano = 0
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const MOUSE_SENSITIVITY = 0.003
-const JOYSTICK_SENSITIVITY = 0.05  # Sensibilidade do analógico direito
+const JOYSTICK_SENSITIVITY = 0.05
 const ZOOM_SPEED = 0.1
 const MIN_ZOOM = 0.3
 const MAX_ZOOM = 2.0
 const FIRST_PERSON_THRESHOLD = 0.6
 const ATTACK_RANGE = 1.0
 const ATTACK_COOLDOWN = 1.0
-const JOYSTICK_DEADZONE = 0.2  # Zona morta do analógico
+const JOYSTICK_DEADZONE = 0.2
+const FALL_LIMIT = -50.0  # Altura mínima antes de respawnar
 
 var mouse_captured = false
 var current_zoom = 1.0
@@ -39,10 +41,21 @@ var knockback_velocity = Vector3.ZERO
 const KNOCKBACK_FORCE = 8.0
 const KNOCKBACK_DECAY = 12.0
 
+var spawn_position = Vector3.ZERO
+
+# Referência ao menu de morte
+var menu_morte = null
+
 func _ready():
 	add_to_group("player")
 	camera_initial_position = camera.position
 	update_camera_zoom()
+	spawn_position = global_position
+	
+	# Buscar o menu de morte na cena
+	menu_morte = get_tree().root.find_child("MenuMorte", true, false)
+	if not menu_morte:
+		push_warning("MenuMorte não encontrado na cena!")
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -56,7 +69,6 @@ func _input(event):
 	if mouse_captured and event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 	
-	# Zoom com mouse wheel ou gatilhos do controle
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			current_zoom -= ZOOM_SPEED
@@ -72,22 +84,23 @@ func update_camera_zoom():
 	sprite.visible = current_zoom >= FIRST_PERSON_THRESHOLD
 
 func _physics_process(delta: float) -> void:
+	# Verificar se caiu do mapa
+	if global_position.y < FALL_LIMIT:
+		respawnar()
+		return
+	
 	if is_invulnerable:
 		processar_invencibilidade(delta)
 	
 	if attack_timer > 0:
 		attack_timer -= delta
 	
-	# Rotação da câmera com analógico direito (Right Stick)
 	processar_rotacao_joystick(delta)
-	
-	# Zoom com gatilhos L2/R2
 	processar_zoom_joystick(delta)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	# Pulo com botão A (Xbox) / X (PlayStation)
 	if (Input.is_action_just_pressed("ui_accept") or Input.is_joy_button_pressed(0, JOY_BUTTON_A)) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
@@ -96,16 +109,20 @@ func _physics_process(delta: float) -> void:
 	if is_being_knocked_back:
 		processar_empurrao(delta)
 	elif not is_attacking:
-		# Movimento com analógico esquerdo (Left Stick) ou teclado
 		var input_dir = get_input_direction()
-		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		
-		if direction:
+		# CORREÇÃO: Normalizar o vetor de direção para manter velocidade constante
+		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y))
+		
+		if direction.length() > 0:
+			direction = direction.normalized()  # Normaliza para manter velocidade uniforme
+			
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 			sprite.play("andando")
 			
-			if input_dir.x != 0:
+			# Determinar flip baseado na direção predominante
+			if abs(input_dir.x) > 0.1:
 				sprite.flip_h = input_dir.x < 0
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -115,40 +132,42 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	get_tree().call_group("inimigos", "update_target_location", global_position)
 
+func respawnar():
+	global_position = spawn_position
+	velocity = Vector3.ZERO
+	knockback_velocity = Vector3.ZERO
+	is_being_knocked_back = false
+	is_attacking = false
+	
+	take_damage(20)
+
 func get_input_direction() -> Vector2:
-	# Combina entrada de teclado e joystick
 	var keyboard_input = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
-	# Analógico esquerdo (Left Stick)
 	var joystick_input = Vector2(
 		Input.get_joy_axis(0, JOY_AXIS_LEFT_X),
 		Input.get_joy_axis(0, JOY_AXIS_LEFT_Y)
 	)
 	
-	# Aplicar zona morta
 	if joystick_input.length() < JOYSTICK_DEADZONE:
 		joystick_input = Vector2.ZERO
 	
-	# Retorna o maior input (prioriza joystick se estiver sendo usado)
 	if joystick_input.length() > 0.1:
 		return joystick_input
 	return keyboard_input
 
 func processar_rotacao_joystick(delta: float):
-	# Analógico direito (Right Stick) para rotação da câmera
 	var joystick_rotation = Vector2(
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	)
 	
-	# Aplicar zona morta
 	if joystick_rotation.length() > JOYSTICK_DEADZONE:
 		rotate_y(-joystick_rotation.x * JOYSTICK_SENSITIVITY)
 
 func processar_zoom_joystick(delta: float):
-	# L2 (LT) = Zoom out, R2 (RT) = Zoom in
-	var zoom_in = Input.get_joy_axis(0, JOY_AXIS_TRIGGER_RIGHT)  # R2/RT
-	var zoom_out = Input.get_joy_axis(0, JOY_AXIS_TRIGGER_LEFT)  # L2/LT
+	var zoom_in = Input.get_joy_axis(0, JOY_AXIS_TRIGGER_RIGHT)
+	var zoom_out = Input.get_joy_axis(0, JOY_AXIS_TRIGGER_LEFT)
 	
 	if zoom_in > 0.1:
 		current_zoom += ZOOM_SPEED * zoom_in * delta * 10
@@ -242,6 +261,19 @@ func take_damage(dano: int, direcao_inimigo: Vector3 = Vector3.ZERO):
 		die()
 
 func die():
-	is_invulnerable = false
-	is_being_knocked_back = false
-	sprite.modulate = Color.WHITE
+	# Tocar animação de morte
+	sprite.play("morrendo")
+	
+	if som_morte:
+		som_morte.play()
+	
+	# Aguardar a animação terminar
+	await get_tree().create_timer(2.0).timeout
+	
+	# Mostrar o menu de morte
+	if menu_morte and menu_morte.has_method("mostrar_menu_morte"):
+		menu_morte.mostrar_menu_morte()
+	else:
+		# Fallback caso o menu não exista
+		push_warning("Menu de morte não encontrado, recarregando cena...")
+		get_tree().reload_current_scene()

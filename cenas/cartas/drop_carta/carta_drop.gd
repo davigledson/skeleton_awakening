@@ -12,6 +12,11 @@ var velocidade_flutuacao: float = 2.0
 var altura_flutuacao: float = 0.3
 var velocidade_rotacao: float = 2.0
 
+# ===== NOVAS VARIÁVEIS PARA MOVIMENTO =====
+var velocidade_aproximacao: float = 1.5  # Velocidade de aproximação do jogador
+var distancia_minima: float = 2.0  # Distância mínima antes de coletar automaticamente
+var player_ref: Node3D = null
+
 # ===== VARIÁVEL CONFIGURADA PELO SPAWNER =====
 var eh_ultima_onda: bool = false
 
@@ -20,6 +25,12 @@ func _ready():
 	
 	print("[CARTA_DROP] Carta criada. É última onda: ", eh_ultima_onda)
 	
+	# Buscar referência do jogador
+	var jogador = get_tree().get_first_node_in_group("player")
+	if jogador:
+		player_ref = jogador
+	
+	# Ajustar altura inicial se estiver muito baixa
 	if global_position.y < 0.5:
 		global_position.y = 1.0
 	
@@ -42,10 +53,36 @@ func _process(delta: float):
 	if esta_coletada:
 		return
 	
+	# ===== MOVIMENTO EM DIREÇÃO AO JOGADOR =====
+	if player_ref and is_instance_valid(player_ref):
+		var direcao_para_jogador = player_ref.global_position - global_position
+		var distancia = direcao_para_jogador.length()
+		
+		# Manter a carta acima do chão
+		var altura_desejada = max(player_ref.global_position.y + 1.0, 1.0)
+		
+		# Se estiver longe, aproximar
+		if distancia > distancia_minima:
+			# Movimento horizontal em direção ao jogador
+			var direcao_horizontal = Vector3(direcao_para_jogador.x, 0, direcao_para_jogador.z).normalized()
+			posicao_inicial += direcao_horizontal * velocidade_aproximacao * delta
+			
+			# Ajustar altura gradualmente
+			posicao_inicial.y = lerp(posicao_inicial.y, altura_desejada, delta * 2.0)
+		else:
+			# Se estiver perto o suficiente, coletar automaticamente
+			if not esta_coletada:
+				coletar_carta(player_ref)
+				return
+	
+	# ===== FLUTUAÇÃO =====
 	tempo_flutuacao += delta * velocidade_flutuacao
 	var offset_y = sin(tempo_flutuacao) * altura_flutuacao
 	global_position.y = posicao_inicial.y + offset_y
+	global_position.x = posicao_inicial.x
+	global_position.z = posicao_inicial.z
 	
+	# ===== ROTAÇÃO =====
 	if sprite:
 		sprite.rotation.y += delta * velocidade_rotacao
 

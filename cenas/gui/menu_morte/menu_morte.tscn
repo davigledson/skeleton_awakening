@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6pi7xskxdwsh"]
+
+[ext_resource type="Script" uid="uid://5u6wa311wmjc" path="res://cenas/gui/menu_morte/menu_morte.gd" id="1_rffdq"]
+[ext_resource type="FontFile" uid="uid://d17c01tt07uie" path="res://fontes/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_lqk1e"]
+[ext_resource type="AudioStream" uid="uid://b1rccjryrh4rs" path="res://cenas/gui/menu_inicial/menu_selecionar.mp3" id="3_pn402"]
+
+[node name="MenuMorte" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rffdq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+texture_filter = 4
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 659.0
+color = Color(0, 0, 0, 0.31764707)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 0
+offset_left = -7.0
+offset_top = 5.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/separation = 20
+
+[node name="Titulo" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_lqk1e")
+theme_override_font_sizes/font_size = 48
+text = "VOCÊ MORREU"
+horizontal_alignment = 1
+
+[node name="BtnReiniciar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_lqk1e")
+theme_override_font_sizes/font_size = 24
+text = "CONTINUAR"
+
+[node name="BtnSair" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_lqk1e")
+theme_override_font_sizes/font_size = 24
+text = "SAIR"
+
+[node name="SomNavegar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pn402")

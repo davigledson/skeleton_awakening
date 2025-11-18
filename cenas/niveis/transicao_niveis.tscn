@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmm8onkc5npky"]
+[gd_scene load_steps=3 format=3 uid="uid://bmm8onkc5npky"]
 
 [ext_resource type="Script" uid="uid://bpjybe8c80iu0" path="res://cenas/niveis/transicao_niveis.gd" id="1_x06vm"]
+[ext_resource type="FontFile" uid="uid://d17c01tt07uie" path="res://fontes/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_0bqiy"]
 
 [node name="transicao_nivel" type="CanvasLayer"]
 script = ExtResource("1_x06vm")
@@ -13,3 +14,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="LabelTransicao" type="Label" parent="."]
+offset_left = 385.0
+offset_top = 156.0
+offset_right = 732.0
+offset_bottom = 215.0
+theme_override_fonts/font = ExtResource("2_0bqiy")
+theme_override_font_sizes/font_size = 22
+text = "Avançando para o próximo nível...
+"

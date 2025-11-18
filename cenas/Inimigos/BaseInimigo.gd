@@ -22,6 +22,8 @@ class_name BaseInimigo
 @export var tem_animacao_atordoamento: bool = false
 @export var duracao_morte: float = 1.0
 
+const FALL_LIMIT = -20.0
+
 var health: int
 var is_dead: bool = false
 var is_stunned: bool = false
@@ -73,6 +75,11 @@ func on_inimigo_ready():
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		return
+	
+	# Verificar queda
+	if global_position.y < FALL_LIMIT:
+		die()
 		return
 	
 	atualizar_billboard()

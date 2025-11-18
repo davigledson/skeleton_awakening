@@ -1,13 +1,15 @@
-[gd_scene load_steps=37 format=3 uid="uid://bgbivrdb5fqnj"]
+[gd_scene load_steps=39 format=3 uid="uid://bgbivrdb5fqnj"]
 
 [ext_resource type="Script" uid="uid://qeb6lccbhnjj" path="res://cenas/personagem_principal.gd" id="1_utspe"]
 [ext_resource type="Texture2D" uid="uid://lmg4dmm1aqrs" path="res://imgs_personagens/esqueleto_sprite.png" id="2_m2v3b"]
 [ext_resource type="PackedScene" uid="uid://085m0pgrbo2t" path="res://cenas/cartas/deck_de_cartas.tscn" id="4_8yovt"]
+[ext_resource type="AudioStream" uid="uid://b4metupibc20i" path="res://sons/morte_som.mp3" id="7_2rm8u"]
 [ext_resource type="PackedScene" uid="uid://fs6gtdpj1xwd" path="res://cenas/gui/hub_ondas.tscn" id="7_m2v3b"]
 [ext_resource type="PackedScene" uid="uid://pmnqyyn8nlau" path="res://cenas/gui/menu_inicial/menu.tscn" id="8_2rm8u"]
 [ext_resource type="PackedScene" uid="uid://dqitr8pmax3xp" path="res://cenas/gui/menu_pause/menu_pause.tscn" id="8_nuciy"]
 [ext_resource type="PackedScene" uid="uid://c5c5hygfk0cf3" path="res://cenas/gui/hub_vida.tscn" id="8_or1fh"]
 [ext_resource type="AudioStream" uid="uid://bcaqlxl4d308f" path="res://sons/tomar_dano.mp3" id="9_2rm8u"]
+[ext_resource type="PackedScene" uid="uid://b6pi7xskxdwsh" path="res://cenas/gui/menu_morte/menu_morte.tscn" id="10_nuciy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_or1fh"]
 atlas = ExtResource("2_m2v3b")
@@ -230,8 +232,7 @@ script = ExtResource("1_utspe")
 transform = Transform3D(-0.8143919, 0.18580122, 0.5497665, 0.57961094, 0.21376711, 0.78635466, 0.028583802, 0.95905125, -0.2817827, 0.015123243, 0.03985952, 0.100204386)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_7rwpq")
-animation = &"andando"
-frame_progress = 0.82149357
+animation = &"morrendo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.2, -5.321842e-09, 2.6609213e-09, 5.321842e-09, 0.2, 3.1720685e-16, -2.6609213e-09, -2.4640186e-16, 0.2, 0.01651673, 0.02048549, 0.07023566)
@@ -260,8 +261,13 @@ transform = Transform3D(1, 2.9802322e-08, -5.9604645e-08, 0, 1, 0, 0, 0, 0.99999
 [node name="som_dano" type="AudioStreamPlayer3D" parent="sons"]
 stream = ExtResource("9_2rm8u")
 
+[node name="som_morte" type="AudioStreamPlayer3D" parent="sons"]
+stream = ExtResource("7_2rm8u")
+
 [node name="Menu" type="Node2D" parent="."]
 
 [node name="menu_inicial" parent="Menu" instance=ExtResource("8_2rm8u")]
 
 [node name="menu_pause" parent="Menu" instance=ExtResource("8_nuciy")]
+
+[node name="MenuMorte" parent="Menu" instance=ExtResource("10_nuciy")]
