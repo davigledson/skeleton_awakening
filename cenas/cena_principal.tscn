@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3gpihyaj1sp2"]
+[gd_scene load_steps=10 format=3 uid="uid://c3gpihyaj1sp2"]
 
 [ext_resource type="PackedScene" uid="uid://bgbivrdb5fqnj" path="res://cenas/personagem_principal.tscn" id="1_ymfkh"]
 [ext_resource type="PackedScene" uid="uid://bxt21hy1pwils" path="res://cenas/cenario_toturial.tscn" id="4_o3inm"]
+[ext_resource type="AudioStream" uid="uid://dbb87hnjc3t6p" path="res://sons/musica_game.mp3" id="5_ua4ml"]
 [ext_resource type="Texture2D" uid="uid://c3lq8fmate1nh" path="res://imgs_cenario/anime_skybox.jpg" id="7_h7caj"]
 [ext_resource type="PackedScene" uid="uid://dsgvv52lpnb4q" path="res://cenas/Inimigos/cogumelo/slime_inimigo.tscn" id="10_t7abg"]
 
@@ -14,6 +15,10 @@ sky_material = SubResource("PanoramaSkyMaterial_71ivt")
 [sub_resource type="Environment" id="Environment_t7abg"]
 background_mode = 2
 sky = SubResource("Sky_x7vf8")
+
+[sub_resource type="GDScript" id="GDScript_ua4ml"]
+script/source = "extends Node
+"
 
 [node name="cena_principal" type="Node3D"]
 
@@ -41,3 +46,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26541984, 0.4129963, -3.03
 [node name="mapa" type="Node3D" parent="."]
 
 [node name="cenario_toturial" parent="mapa" instance=ExtResource("4_o3inm")]
+
+[node name="musica" type="Node" parent="."]
+script = SubResource("GDScript_ua4ml")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="musica"]
+process_mode = 1
+stream = ExtResource("5_ua4ml")
+volume_db = -30.0
+autoplay = true

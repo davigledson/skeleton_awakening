@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfbdr6ilwbxb4"]
+
+[ext_resource type="FontFile" uid="uid://d17c01tt07uie" path="res://fontes/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="1_xbhe5"]
+
+[node name="PainelOpcoes" type="Panel"]
+custom_minimum_size = Vector2(500, 300)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxOpcoes" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -11.0
+offset_top = -4.0
+offset_right = 1143.0
+offset_bottom = 658.0
+theme_override_constants/separation = 20
+
+[node name="TituloOpcoes" type="Label" parent="VBoxOpcoes"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xbhe5")
+theme_override_font_sizes/font_size = 32
+text = "OPÇOES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxVolume" type="HBoxContainer" parent="VBoxOpcoes"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LabelVolume" type="Label" parent="VBoxOpcoes/HBoxVolume"]
+layout_mode = 2
+text = "100%"
+
+[node name="HSliderVolume" type="HSlider" parent="VBoxOpcoes/HBoxVolume"]
+custom_minimum_size = Vector2(300, 30)
+layout_mode = 2
+value = 1.0
+
+[node name="BtnMutarMusica" type="Button" parent="VBoxOpcoes"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "🔊 Desativar Música"
+
+[node name="BtnVoltar" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
+offset_left = 316.0
+offset_top = 224.0
+offset_right = 824.0
+offset_bottom = 274.0
+text = "VOLTAR"
